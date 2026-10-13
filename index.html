@@ -1,4 +1,4 @@
-<!doctype html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>업무보드 v2.33.1 FIREBASE AUTH MENUFIX</title><style>:root{font-family:Arial,'Noto Sans KR',sans-serif;color:#202124;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px 22px;background:#fff;border-bottom:1px solid #e4e7ec}h1{font-size:20px;margin:0 0 3px}header p{margin:0;font-size:12px;color:#777}.header-actions{display:flex;gap:6px;align-items:center;flex-wrap:nowrap;min-width:0}button,.import{border:1px solid #d9dde5;background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer;font-size:12px;line-height:1.1}.header-actions button,.header-actions .import{white-space:nowrap;flex:0 0 auto}.import input{display:none}main{padding:18px;overflow:auto}.boards{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}.board{background:#fff;border:1px solid #e0e4ea;border-radius:16px;box-shadow:0 1px 3px #00000012;min-height:220px;overflow:hidden}.size-1{width:280px}.size-2{width:320px}.size-3{width:360px}.size-4{width:400px}.size-5{width:440px}.board-head{display:flex;align-items:center;gap:7px;padding:13px 14px 8px;cursor:grab}.board-head h2{font-size:16px;margin:0;flex:1}.size-select{width:58px}.add{margin:0 14px 8px;color:#1769e0;border:0;padding:6px 0}.tasks{padding:0 10px 12px}.task{border-top:1px solid #eef0f3;padding:9px 5px;display:grid;grid-template-columns:22px 1fr auto;gap:7px;align-items:start;background:#fff}.task.pinned{background:#fbfcff}.check{width:17px;height:17px;border:1.5px solid #777;border-radius:50%;margin-top:2px;cursor:pointer}.done .check{background:#1769e0;border-color:#1769e0}.done .title{text-decoration:line-through;color:#999}.title{font-size:13px;line-height:1.4;word-break:break-word}.notes{font-size:11px;color:#666;white-space:pre-wrap;line-height:1.35;margin-top:3px;max-height:34px;overflow:hidden}.icons{display:flex;gap:3px}.icon{border:0;padding:1px 3px;font-size:16px;background:transparent}.star.on{color:#1769e0}.pin{font-size:13px}.invalid .title{color:#c62828;font-weight:700}.warning{font-size:10px;color:#c62828;margin-top:2px}.edit{width:100%;border:1px solid #b9c3d1;border-radius:7px;padding:6px;font-size:13px}.memo{width:100%;border:1px solid #d6dbe2;border-radius:7px;padding:6px;margin-top:5px;resize:vertical;font:inherit;font-size:11px}.menu{position:absolute;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 4px 15px #0002;padding:5px;z-index:20;min-width:145px}.menu button{display:block;width:100%;border:0;text-align:left;padding:7px}.menu button:hover{background:#f3f5f8}dialog{width:min(430px,92vw);max-height:82vh;border:0;border-radius:16px;padding:15px;box-shadow:0 10px 40px #0004}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog-head h2{margin:0;font-size:18px}.dialog-head button{border:0}.hint{font-size:11px;color:#777}.star-row{padding:10px;border-top:1px solid #eee;cursor:grab}.tag{display:inline-block;margin-top:5px;padding:2px 7px;border-radius:999px;font-size:10px}.tag-0{background:#e8f0fe;color:#174ea6}.tag-1{background:#e6f4ea;color:#137333}.tag-2{background:#fef7e0;color:#b06000}.tag-3{background:#fce8e6;color:#b3261e}.tag-4{background:#f3e8fd;color:#7627bb}
+<!doctype html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>업무보드 v2.33.4 LOGIN REQUIRED</title><style>:root{font-family:Arial,'Noto Sans KR',sans-serif;color:#202124;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px 22px;background:#fff;border-bottom:1px solid #e4e7ec}h1{font-size:20px;margin:0 0 3px}header p{margin:0;font-size:12px;color:#777}.header-actions{display:flex;gap:6px;align-items:center;flex-wrap:nowrap;min-width:0}button,.import{border:1px solid #d9dde5;background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer;font-size:12px;line-height:1.1}.header-actions button,.header-actions .import{white-space:nowrap;flex:0 0 auto}.import input{display:none}main{padding:18px;overflow:auto}.boards{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}.board{background:#fff;border:1px solid #e0e4ea;border-radius:16px;box-shadow:0 1px 3px #00000012;min-height:220px;overflow:hidden}.size-1{width:280px}.size-2{width:320px}.size-3{width:360px}.size-4{width:400px}.size-5{width:440px}.board-head{display:flex;align-items:center;gap:7px;padding:13px 14px 8px;cursor:grab}.board-head h2{font-size:16px;margin:0;flex:1}.size-select{width:58px}.add{margin:0 14px 8px;color:#1769e0;border:0;padding:6px 0}.tasks{padding:0 10px 12px}.task{border-top:1px solid #eef0f3;padding:9px 5px;display:grid;grid-template-columns:22px 1fr auto;gap:7px;align-items:start;background:#fff}.task.pinned{background:#fbfcff}.check{width:17px;height:17px;border:1.5px solid #777;border-radius:50%;margin-top:2px;cursor:pointer}.done .check{background:#1769e0;border-color:#1769e0}.done .title{text-decoration:line-through;color:#999}.title{font-size:13px;line-height:1.4;word-break:break-word}.notes{font-size:11px;color:#666;white-space:pre-wrap;line-height:1.35;margin-top:3px;max-height:34px;overflow:hidden}.icons{display:flex;gap:3px}.icon{border:0;padding:1px 3px;font-size:16px;background:transparent}.star.on{color:#1769e0}.pin{font-size:13px}.invalid .title{color:#c62828;font-weight:700}.warning{font-size:10px;color:#c62828;margin-top:2px}.edit{width:100%;border:1px solid #b9c3d1;border-radius:7px;padding:6px;font-size:13px}.memo{width:100%;border:1px solid #d6dbe2;border-radius:7px;padding:6px;margin-top:5px;resize:vertical;font:inherit;font-size:11px}.menu{position:absolute;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 4px 15px #0002;padding:5px;z-index:20;min-width:145px}.menu button{display:block;width:100%;border:0;text-align:left;padding:7px}.menu button:hover{background:#f3f5f8}dialog{width:min(430px,92vw);max-height:82vh;border:0;border-radius:16px;padding:15px;box-shadow:0 10px 40px #0004}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog-head h2{margin:0;font-size:18px}.dialog-head button{border:0}.hint{font-size:11px;color:#777}.star-row{padding:10px;border-top:1px solid #eee;cursor:grab}.tag{display:inline-block;margin-top:5px;padding:2px 7px;border-radius:999px;font-size:10px}.tag-0{background:#e8f0fe;color:#174ea6}.tag-1{background:#e6f4ea;color:#137333}.tag-2{background:#fef7e0;color:#b06000}.tag-3{background:#fce8e6;color:#b3261e}.tag-4{background:#f3e8fd;color:#7627bb}
 @media(max-width:1560px){.header-actions{gap:5px}.header-actions button,.header-actions .import{font-size:11px;padding:7px 9px}.desktop-clock{font-size:15px}}
 @media(max-width:1420px){.header-actions button,.header-actions .import{font-size:10px;padding:6px 8px}.desktop-clock{font-size:14px}}
 @media(max-width:1024px){.boards{display:block}.board,.size-1,.size-2,.size-3,.size-4,.size-5{width:100%;margin-bottom:12px}header{padding:12px}.header-actions{gap:4px}header p{display:none}}
@@ -89,7 +89,7 @@ body{padding-bottom:66px}
 #dayList .day-row.day-drop-after::after{bottom:-3px}
 
 
-/* v2.33.1 FIREBASE AUTH MENUFIX: save-location backup + strict text-selection/edit drag isolation */
+/* v2.33.4 LOGIN REQUIRED: save-location backup + strict text-selection/edit drag isolation */
 .board-head[draggable=true]{cursor:grab}
 .task.editing,.task.editing *{user-select:text;-webkit-user-select:text}
 .task.editing .edit,.task.editing .memo{cursor:text!important}
@@ -107,13 +107,13 @@ body{padding-bottom:66px}
 .daily-quote-wrap .daily-quote{width:min(1360px,calc(100vw - 140px));max-width:none;white-space:nowrap;overflow:visible;text-overflow:clip}
 @media(max-width:1024px){.daily-quote-wrap .daily-quote{width:auto;max-width:calc(100vw - 100px);white-space:normal}.completed-toggle .chev{font-size:21px}}
 
-  /* v2.33.1 FIREBASE AUTH MENUFIX: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
+  /* v2.33.4 LOGIN REQUIRED: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
   html { zoom: 1.05; }
   @supports not (zoom: 1.05) {
     body { transform: scale(1.05); transform-origin: top left; width: 95.2381%; min-height: 95.2381vh; }
   }
 
-/* v2.33.1 FIREBASE AUTH MENUFIX: 별표 업무 제목 강조 + 화면 설명 모드 */
+/* v2.33.4 LOGIN REQUIRED: 별표 업무 제목 강조 + 화면 설명 모드 */
 .task.starred:not(.done) .title{color:#1769e0;font-weight:700}
 .explain-overlay{position:fixed;inset:0;background:rgba(70,74,80,.58);z-index:99990;cursor:default}
 .explain-lines{position:fixed;inset:0;width:100vw;height:100vh;z-index:99992;pointer-events:none;overflow:visible}
@@ -211,7 +211,7 @@ body{padding-bottom:66px}
 #dayList .day-row.day-drop-after::after{bottom:-3px}
 
 
-/* v2.33.1 FIREBASE AUTH MENUFIX: save-location backup + strict text-selection/edit drag isolation */
+/* v2.33.4 LOGIN REQUIRED: save-location backup + strict text-selection/edit drag isolation */
 .board-head[draggable=true]{cursor:grab}
 .task.editing,.task.editing *{user-select:text;-webkit-user-select:text}
 .task.editing .edit,.task.editing .memo{cursor:text!important}
@@ -229,13 +229,13 @@ body{padding-bottom:66px}
 .daily-quote-wrap .daily-quote{width:min(1360px,calc(100vw - 140px));max-width:none;white-space:nowrap;overflow:visible;text-overflow:clip}
 @media(max-width:1024px){.daily-quote-wrap .daily-quote{width:auto;max-width:calc(100vw - 100px);white-space:normal}.completed-toggle .chev{font-size:21px}}
 
-  /* v2.33.1 FIREBASE AUTH MENUFIX: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
+  /* v2.33.4 LOGIN REQUIRED: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
   html { zoom: 1.05; }
   @supports not (zoom: 1.05) {
     body { transform: scale(1.05); transform-origin: top left; width: 95.2381%; min-height: 95.2381vh; }
   }
 
-/* v2.33.1 FIREBASE AUTH MENUFIX: 별표 업무 제목 강조 + 화면 설명 모드 */
+/* v2.33.4 LOGIN REQUIRED: 별표 업무 제목 강조 + 화면 설명 모드 */
 .task.starred:not(.done) .title{color:#1769e0;font-weight:700}
 .explain-overlay{position:fixed;inset:0;background:rgba(70,74,80,.58);z-index:99990;cursor:default}
 .explain-lines{position:fixed;inset:0;width:100vw;height:100vh;z-index:99992;pointer-events:none;overflow:visible}
@@ -494,7 +494,7 @@ body{padding-bottom:118px!important}
  body{padding-bottom:104px!important}
 }
 </style><style>
-.firebase-auth-wrap{display:flex;align-items:center;gap:6px}
+.firebase-auth-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .firebase-auth-btn,.firebase-uid-btn{border:1px solid #d8dee7;background:#fff;border-radius:10px;min-height:36px;padding:0 11px;font-size:12px;font-weight:800;cursor:pointer}
 .firebase-auth-btn.signed-in{color:#137333;border-color:#b7dfc5;background:#f0fbf4}
 .firebase-uid-btn{display:none;color:#174ea6}
@@ -502,8 +502,51 @@ body{padding-bottom:118px!important}
 .firebase-auth-status.show{display:block}
 .firebase-auth-status .muted{color:#6b7280;font-size:11px}
 @media(max-width:700px){.firebase-auth-status{top:112px;right:10px;left:10px;max-width:none}}
-</style></head><body><div id="desktopClock" class="desktop-clock"></div>
-<header><div><div class='app-title-row'><h1 id='appTitle'>업무보드</h1><button id='editAppTitle' class='title-edit' title='업무보드 이름 수정'>✎</button><small class='version'>v2.33.1 FIREBASE AUTH MENUFIX</small></div><p>날짜 | 분류 | 내용</p></div><div class='header-actions'><button id='categorySettings'>⚙ 대분류 설정</button><button id='helpView'>ⓘ 사용방법</button><button id='dayView'>📅 날짜별 할 일</button><button id='weekView'>▦ 주간보고</button><button id='starView'>★ 별표 업무</button><button id='exportBtn'>백업</button><label class='import'>복원<input id='importFile' type='file' accept='.json'></label><button id='explainView' type='button'>설명</button></div></header><nav id='responsiveNav' class='responsive-nav' aria-label='모바일 보기 전환'></nav>
+
+[hidden]{display:none!important}
+.account-bar{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;background:#fff;border-bottom:1px solid #dfe3e8}
+.login-gate{max-width:540px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dfe3e8;border-radius:18px;box-shadow:0 8px 30px #0000000a}
+.login-gate h2{margin:0 0 14px}.login-gate p{line-height:1.65;color:#526071}
+.access-note{padding:12px 18px;background:#fff4d6;color:#714d00;line-height:1.5}
+#workboardApp[data-access="readonly"] .check,#workboardApp[data-access="readonly"] .more,#workboardApp[data-access="readonly"] .star{opacity:.45;cursor:default}
+@media(max-width:700px){.login-gate{margin:8vh 14px;padding:22px}.account-bar{padding:8px 10px;justify-content:flex-start}}
+</style></head><body><div id="accountBar" class="account-bar"><button id="gateBackup" type="button" hidden>현재 데이터 백업</button></div><section id="loginGate" class="login-gate"><h2>업무보드 로그인</h2><p id="gateMessage">로그인 상태를 확인하고 있습니다.</p><p>허용된 Google 계정으로 로그인하고 클라우드 연결을 확인한 뒤 사용할 수 있습니다.</p><button id="gateLogin" type="button">Google 로그인</button><button id="gateReconnect" type="button" hidden>클라우드 다시 연결</button><p>화면이 계속 열리지 않으면 인터넷 연결을 확인하고 새로고침하세요. 기존 데이터는 보존됩니다.</p></section><div id="accessNote" class="access-note" hidden></div><script id="workboard-access">// Fail closed before Firebase's module or the application scripts run.
+window.workboardAccessPolicy=(account,state,online)=>{
+ if(account!=='allowed'||state==='loading')return 'locked';
+ return online&&(state==='ready'||state==='saving')?'editable':'readonly';
+};
+window.workboardAccess={account:null,state:'loading',mode:'locked',message:'로그인 상태를 확인하고 있습니다.',
+ canEdit(){return this.mode==='editable'},
+ update(account,state,message){
+  const nextMode=window.workboardAccessPolicy(account,state,navigator.onLine);
+  if(this.mode==='editable'&&nextMode!=='editable')this.commitEditor();
+  this.account=account;this.state=state;this.message=message;
+  this.mode=nextMode;
+  const root=document.getElementById('workboardApp'),gate=document.getElementById('loginGate'),note=document.getElementById('accessNote');
+  if(!root)return;
+  root.hidden=this.mode==='locked';root.dataset.access=this.mode;
+  gate.hidden=this.mode!=='locked';
+  document.getElementById('gateMessage').textContent=message;
+  note.hidden=this.mode!=='readonly';note.textContent='읽기 전용 · '+message+' · 재연결하거나 JSON으로 백업하세요.';
+  if(this.mode!=='editable')document.querySelectorAll(account==='allowed'?'#workboardApp dialog[open]':'dialog[open]').forEach(d=>d.close());
+ },
+ commitEditor(){const el=document.activeElement;if(el&&document.querySelector('.editing'))el.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))}
+};
+// Capture runs before original handlers. Reading/scrolling stays available.
+const readControls='#helpView,#dayView,#weekView,#starView,#prevDay,#nextDay,#todayBtn,#prevWeek,#nextWeek,#thisWeekBtn,#rPrevDay,#rNextDay,#quotePrev,#quoteNext,#copyReport,#dayPicker,#weekPicker,#rDayPicker,[data-close]';
+for(const type of ['click','dblclick','keydown','beforeinput','input','change','dragstart','drop','pointerdown','mousedown']){
+ document.addEventListener(type,event=>{
+  const access=window.workboardAccess;
+  if(access.canEdit()||!event.target.closest?.('#workboardApp'))return;
+  if(access.mode==='readonly'&&event.target.closest(readControls))return;
+  // Plain text can be selected, but editable controls and mutation buttons cannot act.
+  if(access.mode==='readonly'&&(type==='pointerdown'||type==='mousedown')&&!event.target.closest('button,input,textarea,select,.check,.icon'))return;
+  if(access.mode==='readonly'&&type==='keydown'&&(event.key==='Tab'||event.key==='Escape'||((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='c')))return;
+  event.preventDefault();event.stopImmediatePropagation();
+ },true);
+}
+</script><div id="workboardApp" hidden><div id="desktopClock" class="desktop-clock"></div>
+<header><div><div class='app-title-row'><h1 id='appTitle'>업무보드</h1><button id='editAppTitle' class='title-edit' title='업무보드 이름 수정'>✎</button><small class='version'>v2.33.4 LOGIN REQUIRED</small></div><p>날짜 | 분류 | 내용</p></div><div class='header-actions'><button id='categorySettings'>⚙ 대분류 설정</button><button id='helpView'>ⓘ 사용방법</button><button id='dayView'>📅 날짜별 할 일</button><button id='weekView'>▦ 주간보고</button><button id='starView'>★ 별표 업무</button><button id='exportBtn'>백업</button><label class='import'>복원<input id='importFile' type='file' accept='.json'></label><button id='explainView' type='button'>설명</button></div></header><nav id='responsiveNav' class='responsive-nav' aria-label='모바일 보기 전환'></nav>
 <section id='mobileDayInline' class='mobile-day-inline'>
   <div class='mobile-day-toolbar'>
     <button id='rPrevDay' type='button'>‹</button>
@@ -530,10 +573,10 @@ body{padding-bottom:118px!important}
 <h3>5. 메모·고정·정렬</h3><p>업무 메모는 전체 내용이 표시되며 메모를 더블클릭하면 바로 수정할 수 있습니다. 고정 업무는 항상 보드 상단에 유지됩니다. 각 보드의 정렬 메뉴에서 <b>수동순서 / 최신순 / 과거순</b>을 선택할 수 있으며 기본값은 최신순입니다.</p>
 <h3>6. 날짜별 할 일</h3><p>상단 <b>날짜별 할 일</b>에서 를 대분류 색상 태그와 함께 모아봅니다. 업무 카드는 마우스로 드래그해 위·아래 순서를 직접 바꿀 수 있으며, 삽입 위치는 카드 사이의 <b>파란색 선</b>으로 표시됩니다. 날짜별 화면에서 정한 순서는 원래 대분류 보드 순서와 별도로 저장됩니다. 패널은 오른쪽 벽에 붙어 열리고 -1·기본·+1·+2·+3으로 크기를 바꿔도 오른쪽 정렬을 유지합니다. 패널을 직접 드래그한 뒤에는 사용자가 옮긴 위치를 기준으로 유지합니다. 우측 상단의 큰 X 버튼과 넓은 클릭 영역으로 패널을 쉽게 닫을 수 있습니다.</p>
 <h3>7. 주간보고</h3><p><b>주간보고</b>에서 선택한 주의 완료업무, 미완료·이월, 차주 예정 업무를 자동 집계하고 보고서 텍스트를 복사할 수 있습니다.</p>
-<h3>8. 완료됨 서랍</h3><p>완료 업무가 생기면 보드 하단에 <b>완료됨(개수)</b> 서랍이 나타납니다. 완료 체크한 업무는 ⋮ 메뉴뿐 아니라 마우스로 <b>완료됨 서랍에 드래그</b>하여 직접 옮길 수 있습니다. 업무를 드래그할 때 실제 삽입 위치는 카드 사이의 <b>파란색 선</b>으로 표시됩니다. 앞의 큰 화살표 또는 제목 영역을 눌러 접거나 펼칠 수 있습니다.</p><h3>9. 오늘의 문장</h3><p>화면 하단 중앙에 니체의 위버멘쉬·초월·자기극복 사상을 바탕으로 다듬은 365개의 문장이 날짜별로 표시됩니다. 좌우의 ‹ › 버튼은 넓은 클릭 영역으로 쉽게 선택할 수 있고 다른 문장도 볼 수 있으며 날짜가 바뀌면 그날의 문장으로 시작합니다. PC에서는 긴 문장도 한 줄로 볼 수 있도록 문장 영역을 넓게 사용합니다.</p><h3>10. 백업·복원</h3><p>업무 데이터는 현재 브라우저에 자동 저장됩니다. <b>백업</b>을 누르면 지원되는 Chrome/Whale 환경에서는 저장 위치 선택 창이 열리며 원하는 폴더와 파일명을 지정해 JSON으로 저장할 수 있습니다. 브라우저가 이 기능을 지원하지 않으면 일반 다운로드 방식으로 백업됩니다. 필요할 때 <b>복원</b>으로 불러오세요.</p>
+<h3>8. 완료됨 서랍</h3><p>완료 업무가 생기면 보드 하단에 <b>완료됨(개수)</b> 서랍이 나타납니다. 완료 체크한 업무는 ⋮ 메뉴뿐 아니라 마우스로 <b>완료됨 서랍에 드래그</b>하여 직접 옮길 수 있습니다. 업무를 드래그할 때 실제 삽입 위치는 카드 사이의 <b>파란색 선</b>으로 표시됩니다. 앞의 큰 화살표 또는 제목 영역을 눌러 접거나 펼칠 수 있습니다.</p><h3>9. 오늘의 문장</h3><p>화면 하단 중앙에 니체의 위버멘쉬·초월·자기극복 사상을 바탕으로 다듬은 365개의 문장이 날짜별로 표시됩니다. 좌우의 ‹ › 버튼은 넓은 클릭 영역으로 쉽게 선택할 수 있고 다른 문장도 볼 수 있으며 날짜가 바뀌면 그날의 문장으로 시작합니다. PC에서는 긴 문장도 한 줄로 볼 수 있도록 문장 영역을 넓게 사용합니다.</p><h3>10. 백업·복원</h3><p>허용된 계정 로그인이 필수입니다. 로그인하고 클라우드를 확인한 후에만 업무를 수정할 수 있습니다. 연결 오류나 오프라인에서는 마지막 데이터를 읽기 전용으로 표시합니다. 연결하면 클라우드에 저장하고 다른 기기에 실시간 반영합니다. 최초 연결에서는 양쪽 데이터를 백업하며 서로 다르면 선택창이 열립니다. 충돌이나 연결 오류는 상단 동기화 버튼으로 다시 확인하세요. <b>백업</b>을 누르면 지원되는 Chrome/Whale 환경에서는 저장 위치 선택 창이 열리며 원하는 폴더와 파일명을 지정해 JSON으로 저장할 수 있습니다. 브라우저가 이 기능을 지원하지 않으면 일반 다운로드 방식으로 백업됩니다. 필요할 때 <b>복원</b>으로 불러오세요.</p>
 <h3>설명 모드</h3><p><b>설명</b>을 누르면 화면이 잠기고 주요 UI의 공식 명칭이 빨간색으로 표시됩니다. ESC 또는 우측 상단 ×로 종료합니다. ★ 별표를 선택한 업무는 업무 제목도 별표와 같은 색상으로 강조됩니다.</p></div></dialog>
 <dialog id='starDialog'><div class='dialog-head'><h2>★ 별표 할 일</h2><button data-close='starDialog'>✕</button></div><p class='hint'>드래그해서 사이드바 우선순서를 바꿀 수 있습니다.</p><div id='starList'></div></dialog>
-<script>const KEY='mason-workboard-v1';
+</div><script>const KEY='mason-workboard-v1';
 const COLORS=['#e8f0fe|#174ea6','#e6f4ea|#137333','#fef7e0|#b06000','#fce8e6|#b3261e','#f3e8fd|#7627bb','#e0f7fa|#006064','#fff3e0|#e65100','#f1f8e9|#33691e','#eceff1|#37474f','#fce4ec|#880e4f'];
 const defaultData={appTitle:'업무보드',boards:[
 {id:'edu',name:'①교육관리',displayName:'교육관리',desc:'▶과정·홈페이지·콘텐츠·강사 관련',size:2,sort:'latest',color:COLORS[0],tasks:[]},
@@ -552,6 +595,7 @@ let undoStack=[];
 let lastSavedSnapshot=JSON.stringify(data);
 let undoing=false;
 function save(){
+ if(!window.workboardAccess.canEdit()){data=JSON.parse(lastSavedSnapshot);render();return;}
  const next=JSON.stringify(data);
  if(!undoing && next!==lastSavedSnapshot){
    undoStack.push(lastSavedSnapshot);
@@ -559,16 +603,17 @@ function save(){
  }
  localStorage.setItem(KEY,next);
  lastSavedSnapshot=next;
+ window.dispatchEvent(new Event("workboard-saved"));
 }
 function undoLastAction(){
+ if(!window.workboardAccess.canEdit())return;
  if(!undoStack.length)return;
  const prev=undoStack.pop();
  undoing=true;
  try{
    data=JSON.parse(prev);
    migrate();
-   localStorage.setItem(KEY,JSON.stringify(data));
-   lastSavedSnapshot=JSON.stringify(data);
+   save();
    render();
    renderDayIfOpen();
    renderStars();
@@ -1069,7 +1114,7 @@ function renderDailyThought(){
  el.textContent=`${String(q.n).padStart(3,'0')}. ${q.text}`;
  if(bookEl)bookEl.textContent=`— 『${q.book}』`;
 }
-function renderDay(){const picker=document.querySelector('#dayPicker');const chosen=new Date(picker.value+'T00:00:00');let rows=allTasks().filter(x=>{const d=dateForTask(x.t,chosen);return d&&localISO(d)===picker.value&&!x.t.pinned&&!x.t.archivedDone});const key=picker.value;const ids=rows.map(x=>x.t.id);let order=(data.ui.dayOrders[key]||[]).filter(id=>ids.includes(id));ids.forEach(id=>{if(!order.includes(id))order.push(id)});data.ui.dayOrders[key]=order;const pos=new Map(order.map((id,i)=>[id,i]));rows.sort((a,b)=>(pos.get(a.t.id)??9999)-(pos.get(b.t.id)??9999));const root=document.querySelector('#dayList');root.innerHTML='';if(!rows.length){root.innerHTML=`<div class='empty'>${fmt(chosen)}에 등록된 업무가 없습니다.</div>`;return}rows.forEach(x=>{const el=document.createElement('div');el.className='day-row'+(x.t.done?' done':'');el.draggable=true;el.dataset.taskId=x.t.id;el.innerHTML=`<span class='check'></span><div><div class='day-title'>${escapeHtml(x.t.title)}</div>${x.t.note?`<div class='mini-note ${picker.value===localISO(new Date())?'today-note':''}'>${escapeHtml(x.t.note)}</div>`:''}</div><span class='tag' style='${tagStyle(x.b)}'>#${escapeHtml(boardLabel(x.b))}</span>`;el.querySelector('.check').onclick=()=>toggleDone(x.t);root.appendChild(el)});bindDayTaskDnD()}
+function renderDay(){const picker=document.querySelector('#dayPicker');const chosen=new Date(picker.value+'T00:00:00');let rows=allTasks().filter(x=>{const d=dateForTask(x.t,chosen);return d&&localISO(d)===picker.value&&!x.t.pinned&&!x.t.archivedDone});const key=picker.value;const ids=rows.map(x=>x.t.id);let order=(data.ui.dayOrders[key]||[]).filter(id=>ids.includes(id));ids.forEach(id=>{if(!order.includes(id))order.push(id)});if(window.workboardAccess.canEdit())data.ui.dayOrders[key]=order;const pos=new Map(order.map((id,i)=>[id,i]));rows.sort((a,b)=>(pos.get(a.t.id)??9999)-(pos.get(b.t.id)??9999));const root=document.querySelector('#dayList');root.innerHTML='';if(!rows.length){root.innerHTML=`<div class='empty'>${fmt(chosen)}에 등록된 업무가 없습니다.</div>`;return}rows.forEach(x=>{const el=document.createElement('div');el.className='day-row'+(x.t.done?' done':'');el.draggable=true;el.dataset.taskId=x.t.id;el.innerHTML=`<span class='check'></span><div><div class='day-title'>${escapeHtml(x.t.title)}</div>${x.t.note?`<div class='mini-note ${picker.value===localISO(new Date())?'today-note':''}'>${escapeHtml(x.t.note)}</div>`:''}</div><span class='tag' style='${tagStyle(x.b)}'>#${escapeHtml(boardLabel(x.b))}</span>`;el.querySelector('.check').onclick=()=>toggleDone(x.t);root.appendChild(el)});bindDayTaskDnD()}
 function bindDayTaskDnD(){const root=document.querySelector('#dayList'),key=document.querySelector('#dayPicker').value;let dragId=null;const clear=()=>root.querySelectorAll('.day-row').forEach(r=>r.classList.remove('day-drop-before','day-drop-after','day-dragging'));root.querySelectorAll('.day-row').forEach(row=>{row.addEventListener('dragstart',e=>{dragId=row.dataset.taskId;row.classList.add('day-dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragId)});row.addEventListener('dragend',()=>{clear();dragId=null});row.addEventListener('dragover',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();clear();const r=row.getBoundingClientRect();row.classList.add(e.clientY>r.top+r.height/2?'day-drop-after':'day-drop-before')});row.addEventListener('drop',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();const target=row.dataset.taskId,after=e.clientY>row.getBoundingClientRect().top+row.getBoundingClientRect().height/2;let order=(data.ui.dayOrders[key]||[]).filter(id=>id!==dragId);let i=order.indexOf(target);if(i<0)i=order.length-1;order.splice(i+(after?1:0),0,dragId);data.ui.dayOrders[key]=order;save();renderDay()})})}
 function renderWeek(){const anchor=new Date(document.querySelector('#weekPicker').value+'T00:00:00');const start=startOfWeek(anchor),end=addDays(start,6),nextStart=addDays(start,7),nextEnd=addDays(start,13);document.querySelector('#weekRange').textContent=`${start.getFullYear()}년 ${fmt(start)} ~ ${fmt(end)}`;const completed=allTasks().filter(x=>x.t.done&&x.t.completedAt&&new Date(x.t.completedAt)>=start&&new Date(x.t.completedAt)<addDays(end,1));const carry=allTasks().filter(x=>{if(x.t.done||x.t.pinned||x.t.archivedDone)return false;const d=dateForTask(x.t,start);return d&&d<=end});const next=allTasks().filter(x=>{if(x.t.done||x.t.pinned||x.t.archivedDone)return false;const d=dateForTask(x.t,nextStart);return d&&d>=nextStart&&d<=nextEnd});document.querySelector('#weekSummary').innerHTML=`<span>완료 ${completed.length}</span><span>미완료·이월 ${carry.length}</span><span>차주 예정 ${next.length}</span>`;const group=rows=>data.boards.map(b=>({b,rows:rows.filter(x=>x.b.id===b.id)})).filter(g=>g.rows.length);let text=`[주간업무보고] ${fmt(start)}~${fmt(end)}\n\n[완료업무]\n`;for(const g of group(completed)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows){const p=parts(x.t.title);text+=`- ${p?p.sub+' | '+p.content:x.t.title}\n`;if(x.t.note)text+=`  ${x.t.note.replace(/\n/g,' / ')}\n`}}text+='\n[미완료·이월]\n';if(!carry.length)text+='- 없음\n';for(const g of group(carry)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows)text+=`- ${x.t.title}\n`}text+='\n[차주 예정]\n';if(!next.length)text+='- 없음\n';for(const g of group(next)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows)text+=`- ${x.t.title}\n`}document.querySelector('#reportText').value=text.trim()}
 function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -1089,10 +1134,10 @@ function clampDayPanel(){const d=document.querySelector('#dayDialog');if(!d.open
 document.querySelector('#dayPicker').onchange=renderDay;document.querySelector('#todayBtn').onclick=()=>{document.querySelector('#dayPicker').value=localISO(new Date());renderDay()};document.querySelector('#prevDay').onclick=()=>shiftDay(-1);document.querySelector('#nextDay').onclick=()=>shiftDay(1);function shiftDay(n){const p=document.querySelector('#dayPicker');p.value=localISO(addDays(new Date(p.value+'T00:00:00'),n));renderDay()}
 document.querySelector('#weekPicker').onchange=renderWeek;document.querySelector('#thisWeekBtn').onclick=()=>{document.querySelector('#weekPicker').value=localISO(new Date());renderWeek()};document.querySelector('#prevWeek').onclick=()=>shiftWeek(-7);document.querySelector('#nextWeek').onclick=()=>shiftWeek(7);function shiftWeek(n){const p=document.querySelector('#weekPicker');p.value=localISO(addDays(new Date(p.value+'T00:00:00'),n));renderWeek()}
 document.querySelector('#copyReport').onclick=async()=>{const t=document.querySelector('#reportText');try{await navigator.clipboard.writeText(t.value);document.querySelector('#copyReport').textContent='복사됨';setTimeout(()=>document.querySelector('#copyReport').textContent='보고서 복사',1000)}catch{t.select();document.execCommand('copy')}};
-document.querySelector('#exportBtn').onclick=async()=>{const json=JSON.stringify(data,null,2),blob=new Blob([json],{type:'application/json'}),name='mason-workboard-v2.33.1 FIREBASE AUTH MENUFIX-backup.json';if('showSaveFilePicker' in window){try{const handle=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON 백업 파일',accept:{'application/json':['.json']}}]});const writable=await handle.createWritable();await writable.write(blob);await writable.close();return}catch(err){if(err&&err.name==='AbortError')return}}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)};document.querySelector('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);migrate();save();render()}catch{alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f)};
+document.querySelector('#exportBtn').onclick=async()=>{const json=JSON.stringify(data,null,2),blob=new Blob([json],{type:'application/json'}),name='mason-workboard-v2.33.4 LOGIN REQUIRED-backup.json';if('showSaveFilePicker' in window){try{const handle=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON 백업 파일',accept:{'application/json':['.json']}}]});const writable=await handle.createWritable();await writable.write(blob);await writable.close();return}catch(err){if(err&&err.name==='AbortError')return}}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)};document.querySelector('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);migrate();save();render()}catch{alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f)};
 document.querySelector('#quotePrev').onclick=()=>{quoteOffset--;renderDailyThought()};document.querySelector('#quoteNext').onclick=()=>{quoteOffset++;renderDailyThought()};
 
-// v2.33.1 FIREBASE AUTH MENUFIX 설명 모드: 화면 기능을 잠그고 공식 UI 명칭을 표시한다.
+// v2.33.4 LOGIN REQUIRED 설명 모드: 화면 기능을 잠그고 공식 UI 명칭을 표시한다.
 let explainMode=false;
 function explainTargets(){
  const specs=[
@@ -1204,6 +1249,7 @@ render();renderDailyThought();
 </div>
 <script>
 (function(){
+ document.getElementById('workboardApp').appendChild(document.getElementById('pomoTest'));
  let mode='focus',focusMin=25,left=focusMin*60,running=false,timer=null;
  const $=id=>document.getElementById(id),dur=()=>mode==='focus'?focusMin*60:5*60;
  function draw(){
@@ -1243,9 +1289,71 @@ render();renderDailyThought();
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
-</script><script type="module">
+</script><script id="workboard-sync-core">
+// Whole-document synchronization. Firestore I/O is injected by the browser adapter.
+window.workboardCanonical=function(value){
+ const sort=x=>Array.isArray(x)?x.map(sort):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,sort(x[k])])):x;
+ return JSON.stringify(sort(value));
+};
+window.createWorkboardSync=function(a){
+ let generation=0,unsubscribe=null,timer=null,baseline=null,ready=false,busy=false,dirty=false,deferred;
+ const copy=x=>JSON.parse(JSON.stringify(x));
+ const equal=(x,y)=>window.workboardCanonical(x)===window.workboardCanonical(y);
+ function stop(){generation++;ready=false;clearTimeout(timer);unsubscribe?.();unsubscribe=null;deferred=undefined}
+ function conflict(remote){ready=false;a.backup(a.get(),'conflict-local');if(remote)a.backup(remote.data,'conflict-cloud');a.status('conflict','다른 기기의 변경과 겹쳤습니다. 현재 내용을 유지했습니다. 동기화 버튼에서 사용할 데이터를 선택하세요.')}
+ function receive(remote){
+  if(!ready)return;
+  if(busy||a.editing()){deferred=remote;clearTimeout(timer);timer=setTimeout(drain,700);return}
+  try{
+   if(equal(remote,baseline))return;
+   if(!remote){conflict(null);return}
+   if(dirty){conflict(remote);return}
+   if(!equal(a.get(),remote.data)){a.backup(a.get(),'before-remote');a.apply(copy(remote.data))}
+   baseline=copy(remote);a.status('ready','클라우드와 동기화됨');
+  }catch(e){ready=false;a.status('error',e.message)}
+ }
+ function drain(){if(deferred!==undefined){const r=deferred;deferred=undefined;receive(r)}}
+ async function flush(){
+  clearTimeout(timer);
+  if(!ready||busy||!dirty)return;
+  const g=generation,expected=copy(baseline),payload=copy(a.get());busy=true;
+  a.status('saving','클라우드 저장 중…');
+  try{
+   const committed=await a.write(expected,payload,()=>g===generation);
+   if(g!==generation)return;
+   baseline=copy(committed);dirty=!equal(a.get(),payload);a.pending(dirty);
+   a.status(dirty?'saving':'ready',dirty?'추가 변경 저장 대기':'클라우드와 동기화됨');
+  }catch(e){
+   if(g!==generation)return;
+   ready=false;a.pending(true);a.status(e.code==='workboard/conflict'?'conflict':'error',e.code==='workboard/conflict'?'동시 수정이 감지되었습니다. 로컬 변경은 보존했습니다. 동기화 버튼에서 다시 선택하세요.':'클라우드 저장 실패: '+e.message+' · 로컬 데이터 유지. 동기화 버튼으로 재시도하세요.');
+  }finally{busy=false;if(g===generation){drain();if(ready&&dirty)timer=setTimeout(flush,700)}}
+ }
+ async function connect(){
+  if(busy){a.status('saving','이전 저장이 끝난 후 다시 시도하세요.');return}
+  stop();const g=generation;a.status('loading','클라우드 데이터 확인 중…');
+  try{
+   const remote=await a.read();if(g!==generation)return;
+   a.backup(a.get(),'before-connect');if(remote)a.backup(remote.data,'connect-cloud');
+   const choice=remote&&equal(a.get(),remote.data)?'cloud':await a.choose(remote,copy(a.get()));
+   if(g!==generation)return;
+   if(choice==='cancel'){a.status('local','연결 보류 · 읽기 전용');return}
+   baseline=copy(remote);ready=true;
+   if(choice==='cloud'&&remote){a.apply(copy(remote.data));dirty=false;a.pending(false)}
+   else{dirty=true;a.pending(true);await flush();if(g!==generation||!ready)return}
+   unsubscribe=a.subscribe(r=>{if(g===generation)receive(r)},e=>{if(g!==generation)return;ready=false;a.status('error','실시간 연결 실패: '+e.message+' · 로컬 데이터 유지')});
+   a.status('ready','클라우드와 동기화됨');
+  }catch(e){if(g===generation){ready=false;a.status('error','연결 실패: '+e.message+' · 기존 데이터 유지')}}
+ }
+ function saved(){dirty=true;a.pending(true);if(ready){clearTimeout(timer);timer=setTimeout(flush,700)}else a.status('local','로컬 데이터 보존 · 다시 연결 필요')}
+ return {connect,stop,saved,flush};
+};
+
+</script>
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+
+import { getFirestore, doc, getDocFromServer, onSnapshot, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDZoG792l92pG3oRrLidH3_eXAuzLUWWn4",
@@ -1269,10 +1377,18 @@ function showStatus(html,autoHide=false){const el=$('firebaseAuthStatus');if(!el
 
 await ensureUI();
 const loginBtn=$('firebaseAuthBtn'),uidBtn=$('firebaseUidBtn');
+document.getElementById('accountBar').appendChild(loginBtn.parentElement);
+document.getElementById('gateLogin').onclick=()=>loginBtn.click();
+await setPersistence(auth,browserLocalPersistence).catch(e=>console.warn('Login persistence unavailable',e.code));
 
 loginBtn.addEventListener('click',async()=>{
   if(currentUser){
-    if(confirm(`${currentUser.email||'현재 계정'}에서 로그아웃할까요?`)) await signOut(auth);
+    window.workboardAccess.commitEditor();
+    if(confirm(`${currentUser.email||'현재 계정'}에서 로그아웃할까요? 저장 대기 내용은 이 브라우저에 보존됩니다.`)) {
+      window.workboardAccess.update(null,'loading','로그아웃 중…');
+      document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+      try{await signOut(auth)}catch(e){startSync(currentUser);showStatus('로그아웃 실패: '+String(e.code||e.message))}
+    }
     return;
   }
   if(location.protocol==='file:'){
@@ -1296,20 +1412,134 @@ uidBtn.addEventListener('click',async()=>{
   }
 });
 
+const db=getFirestore(app);
+const ALLOWED_UID='d9k2X6sdpaVYdSiDjpNU0Z7FnzF3';
+const META_KEY=KEY+'-firestore-meta';
+const BACKUP_KEY=KEY+'-firestore-backups';
+const FIRST_KEY=KEY+'-before-first-firestore';
+const writer=crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random();
+let applyingRemote=false;
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const syncBtn=document.createElement('button');syncBtn.className='firebase-auth-btn';syncBtn.textContent='동기화 · 로그인 필요';syncBtn.type='button';loginBtn.parentElement.appendChild(syncBtn);
+const backupBtn=document.createElement('button');backupBtn.className='firebase-auth-btn';backupBtn.textContent='연결 전 백업';backupBtn.hidden=true;backupBtn.type='button';loginBtn.parentElement.appendChild(backupBtn);
+function downloadJSON(value,name){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+backupBtn.onclick=()=>{
+ try{
+  const first=localStorage.getItem(FIRST_KEY),history=localStorage.getItem(BACKUP_KEY);
+  const entries=[...(first?[JSON.parse(first)]:[]),...JSON.parse(history||'[]')];
+  if(!entries.length){alert('아직 연결 백업이 없습니다. 상단 백업 버튼으로 현재 데이터를 저장하세요.');return}
+  const dialog=document.createElement('dialog');dialog.className='wide';dialog.innerHTML='<h2>연결 전 백업 다운로드</h2><p>다운로드한 JSON은 상단 복원 버튼으로 불러올 수 있습니다. 동기화 중 복원하면 클라우드에도 저장됩니다.</p>';
+  entries.forEach((entry,i)=>{const btn=document.createElement('button');btn.textContent=(i===0&&first?'최초 원본 · ':'')+entry.createdAt+' · '+entry.reason;btn.style.cssText='display:block;margin:8px 0';btn.onclick=()=>downloadJSON(entry.data,'workboard-preserved-'+i+'.json');dialog.appendChild(btn)});
+  const close=document.createElement('button');close.textContent='닫기';close.onclick=()=>{dialog.close();dialog.remove()};dialog.appendChild(close);dialog.addEventListener('cancel',()=>dialog.remove());document.body.appendChild(dialog);dialog.showModal();
+ }catch(e){showStatus('백업 읽기 실패: '+escapeHTML(e.message))}
+};
+function backup(value,reason){
+ const entry={createdAt:new Date().toISOString(),reason,data:value};
+ if(!localStorage.getItem(FIRST_KEY))localStorage.setItem(FIRST_KEY,JSON.stringify(entry));
+ const history=JSON.parse(localStorage.getItem(BACKUP_KEY)||'[]');
+ history.push(entry);localStorage.setItem(BACKUP_KEY,JSON.stringify(history.slice(-5)));
+}
+function validate(value){
+ if(!value||!Array.isArray(value.boards)||!value.boards.every(b=>b&&typeof b==='object'&&Array.isArray(b.tasks)&&b.tasks.every(t=>t&&typeof t==='object')))throw Error('업무 데이터 형식이 올바르지 않습니다.');
+ return value;
+}
+function envelope(snap){
+ if(!snap.exists())return null;
+ const v=snap.data();if(Object.keys(v).length===0)return null;validate(v.data);
+ // Arrays nested inside arrays are not accepted by Firestore; data is stored as
+ // a native map. ui.dayOrders and task arrays keep their original structure.
+ return {data:v.data,revision:v.revision||0,lastWriter:v.lastWriter||'',writeId:v.writeId||''};
+}
+function choiceDialog(remote,local){return new Promise(resolve=>{
+ const dialog=document.createElement('dialog');dialog.className='wide';dialog.style.maxWidth='min(560px,94vw)';
+ const count=d=>d.boards.reduce((n,b)=>n+b.tasks.length,0);
+ dialog.innerHTML='<h2>업무보드 최초 연결 / 다시 연결</h2><p>'+ (remote?'클라우드와 이 브라우저의 데이터가 다릅니다. 자동으로 덮어쓰지 않습니다.':'클라우드 문서가 없습니다. 현재 브라우저 데이터를 최초 1회 업로드할 수 있습니다.')+'</p><p>이 브라우저: '+count(local)+'개 업무'+(remote?' / 클라우드: '+count(remote.data)+'개 업무':'')+'</p><p>연결 전 원본과 선택 시점 양쪽 데이터는 별도 로컬 백업으로 보존됩니다. <b>개수만으로 최신 여부를 판단하지 마세요.</b></p><div style="display:flex;flex-wrap:wrap;gap:8px"><button data-choice="cancel" autofocus>연결 보류 (읽기 전용)</button>'+(remote?'<button data-choice="cloud">클라우드 사용 (권장)</button>':'')+'<button data-choice="local">'+(remote?'현재 PC 데이터로 클라우드 교체':'현재 데이터 최초 업로드')+'</button><button data-export>현재 데이터 JSON 다운로드</button>'+(remote?'<button data-cloud-export>클라우드 JSON 다운로드</button>':'')+'</div>';
+ dialog.querySelector('[data-export]').onclick=()=>downloadJSON(data,'workboard-before-connect.json');
+ dialog.querySelector('[data-cloud-export]')?.addEventListener('click',()=>downloadJSON(remote.data,'workboard-cloud-before-connect.json'));
+ const cancel=()=>finish('cancel');
+ function finish(value){window.removeEventListener('workboard-auth-changing',cancel);dialog.close();dialog.remove();resolve(value)}
+ window.addEventListener('workboard-auth-changing',cancel,{once:true});
+ dialog.querySelectorAll('[data-choice]').forEach(btn=>btn.onclick=()=>{const c=btn.dataset.choice;if(c==='local'&&remote&&!confirm('현재 PC 내용으로 클라우드 전체를 교체합니다. 다른 기기에도 반영됩니다. 양쪽 JSON을 다운로드했는지 확인하세요. 계속할까요?'))return;finish(c)});
+ dialog.addEventListener('cancel',e=>{e.preventDefault();finish('cancel')});
+ document.body.appendChild(dialog);dialog.showModal();
+})}
+function applyRemote(value){
+ validate(value);applyingRemote=true;
+ try{
+  // Write the replacement cache first. A storage error must not replace the UI.
+  localStorage.setItem(KEY,JSON.stringify(value));data=structuredClone(value);migrate();
+  lastSavedSnapshot=JSON.stringify(data);undoStack=[];
+  render();renderDayIfOpen();renderStars();if(document.querySelector('#weekDialog')?.open)renderWeek();if(document.querySelector('#categoryDialog')?.open)renderCategoryEditor();if(typeof renderResponsiveDay==='function')renderResponsiveDay();
+ }finally{applyingRemote=false}
+}
+let sync=null;
+window.addEventListener('workboard-saved',()=>{if(!applyingRemote)sync?.saved()});
+document.getElementById('gateReconnect').onclick=()=>syncBtn.click();
+ document.getElementById('gateBackup').onclick=()=>downloadJSON(data,'workboard-preserved-current.json');
+ syncBtn.onclick=()=>{if(currentUser?.uid===ALLOWED_UID)sync?.connect();else showStatus('Google 로그인 후 동기화를 연결할 수 있습니다.')};
+function startSync(user){
+ window.dispatchEvent(new Event('workboard-auth-changing'));
+ sync?.stop();sync=null;
+ const allowed=user?.uid===ALLOWED_UID;
+ document.getElementById('gateBackup').hidden=!allowed;
+ backupBtn.hidden=!allowed;uidBtn.hidden=!user;
+ document.getElementById('gateLogin').textContent=user?'계정 변경 / 로그아웃':'Google 로그인';
+ document.getElementById('gateReconnect').hidden=!allowed;
+ window.workboardAccess.update(!user?null:allowed?'allowed':'denied','loading',!user?'Google 로그인 후 업무보드를 사용할 수 있습니다.':allowed?'클라우드 데이터 확인 중…':'허용된 계정이 아닙니다. 로그아웃 후 등록된 계정으로 로그인하세요.');
+ if(!user){syncBtn.textContent='동기화 · 로그인 필요';document.getElementById('firebaseAuthStatus')?.classList.remove('show');return}
+ if(user.uid!==ALLOWED_UID){syncBtn.textContent='동기화 · 접근 제한';showStatus('허용된 계정만 클라우드에 연결할 수 있습니다. 현재 로컬 데이터는 유지됩니다.');return}
+ const ref=doc(db,'users',user.uid,'workboard','state');
+ sync=window.createWorkboardSync({
+  get:()=>data,apply:applyRemote,backup,choose:choiceDialog,
+  editing:()=>{const el=document.activeElement;return !!document.querySelector('.editing,.dragging')||!!el&&(el.isContentEditable||((el.tagName==='INPUT'||el.tagName==='TEXTAREA')&&!el.readOnly))},
+  pending:pending=>localStorage.setItem(META_KEY,JSON.stringify({uid:user.uid,pending,localUpdatedAt:Date.now()})),
+  status:(state,message)=>{window.workboardAccess.update('allowed',state,message);syncBtn.textContent='동기화 · '+({ready:'완료',saving:'저장 중',loading:'확인 중',conflict:'충돌 확인',error:'재시도',local:'연결 보류'}[state]||state);if(state!=='ready')showStatus(escapeHTML(message));else showStatus(escapeHTML(message),true)},
+  read:async()=>envelope(await getDocFromServer(ref)),
+  subscribe:(next,error)=>onSnapshot(ref,{includeMetadataChanges:true},snap=>{if(!snap.metadata.hasPendingWrites&&!snap.metadata.fromCache){try{next(envelope(snap))}catch(e){error(e)}}},error),
+  write:async(expected,value,active)=>{
+   validate(value);
+   // Conservative preflight. Server rejects oversized/deep data; local survives.
+   if(new TextEncoder().encode(JSON.stringify(value)).length>850000)throw Error('단일 문서 크기 안전 한도 초과. JSON 백업 후 데이터 분할이 필요합니다.');
+   const writeId=crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random();
+   const result=await runTransaction(db,async tx=>{
+    const actual=envelope(await tx.get(ref));
+    if(!active()){const e=Error('연결이 변경되었습니다.');e.code='workboard/cancelled';throw e}
+    if(window.workboardCanonical(actual)!==window.workboardCanonical(expected)){const e=Error('클라우드가 다른 기기에서 변경되었습니다.');e.code='workboard/conflict';throw e}
+    const next={data:value,revision:(actual?.revision||0)+1,lastWriter:writer,writeId};
+    tx.set(ref,{...next,schemaVersion:1,updatedAt:serverTimestamp()});return next;
+   });return result;
+  }
+ });
+ if(navigator.onLine)sync.connect();else window.workboardAccess.update('allowed','error','인터넷 연결이 없습니다. 마지막 데이터를 읽기 전용으로 표시합니다.');
+}
+window.addEventListener('beforeunload',event=>{try{if(currentUser&&JSON.parse(localStorage.getItem(META_KEY)||'{}').pending){event.preventDefault();event.returnValue=''}}catch{}});
+window.addEventListener('offline',()=>{
+ window.workboardAccess.commitEditor();
+ sync?.stop();
+ syncBtn.textContent='동기화 · 연결 끊김';
+ document.getElementById('firebaseAuthStatus')?.classList.remove('show');
+ window.workboardAccess.update(currentUser?.uid===ALLOWED_UID?'allowed':currentUser?'denied':null,'error','인터넷 연결 끊김. 저장 대기 데이터는 로컬에 보존됩니다.');
+});
+window.addEventListener('online',()=>{if(currentUser?.uid===ALLOWED_UID)sync?.connect()});
+window.masonFirebase={app,auth,db};
+
+
 onAuthStateChanged(auth,user=>{
+  window.workboardAccess.commitEditor();
   currentUser=user;
+  startSync(user);
   if(user){
     loginBtn.textContent='로그인됨 · '+(user.displayName||user.email||'Google');
     loginBtn.classList.add('signed-in');
     uidBtn.style.display='inline-flex';
-    showStatus(`<b>Firebase 로그인 완료</b><br>${user.email||''}<div class="muted">UID: <code>${user.uid}</code><br>다음 단계에서 이 UID만 Firestore 접근을 허용합니다.</div>`);
+
   }else{
     loginBtn.textContent='Google 로그인';
     loginBtn.classList.remove('signed-in');
     uidBtn.style.display='none';
-    const st=$('firebaseAuthStatus');if(st)st.classList.remove('show');
+
   }
 });
 
-window.masonFirebase={app,auth};
+
 </script></body></html>
