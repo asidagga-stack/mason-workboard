@@ -1,0 +1,1315 @@
+<!doctype html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>업무보드 v2.33.1 FIREBASE AUTH MENUFIX</title><style>:root{font-family:Arial,'Noto Sans KR',sans-serif;color:#202124;background:#f6f8fb}*{box-sizing:border-box}body{margin:0}header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:16px 22px;background:#fff;border-bottom:1px solid #e4e7ec}h1{font-size:20px;margin:0 0 3px}header p{margin:0;font-size:12px;color:#777}.header-actions{display:flex;gap:6px;align-items:center;flex-wrap:nowrap;min-width:0}button,.import{border:1px solid #d9dde5;background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer;font-size:12px;line-height:1.1}.header-actions button,.header-actions .import{white-space:nowrap;flex:0 0 auto}.import input{display:none}main{padding:18px;overflow:auto}.boards{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}.board{background:#fff;border:1px solid #e0e4ea;border-radius:16px;box-shadow:0 1px 3px #00000012;min-height:220px;overflow:hidden}.size-1{width:280px}.size-2{width:320px}.size-3{width:360px}.size-4{width:400px}.size-5{width:440px}.board-head{display:flex;align-items:center;gap:7px;padding:13px 14px 8px;cursor:grab}.board-head h2{font-size:16px;margin:0;flex:1}.size-select{width:58px}.add{margin:0 14px 8px;color:#1769e0;border:0;padding:6px 0}.tasks{padding:0 10px 12px}.task{border-top:1px solid #eef0f3;padding:9px 5px;display:grid;grid-template-columns:22px 1fr auto;gap:7px;align-items:start;background:#fff}.task.pinned{background:#fbfcff}.check{width:17px;height:17px;border:1.5px solid #777;border-radius:50%;margin-top:2px;cursor:pointer}.done .check{background:#1769e0;border-color:#1769e0}.done .title{text-decoration:line-through;color:#999}.title{font-size:13px;line-height:1.4;word-break:break-word}.notes{font-size:11px;color:#666;white-space:pre-wrap;line-height:1.35;margin-top:3px;max-height:34px;overflow:hidden}.icons{display:flex;gap:3px}.icon{border:0;padding:1px 3px;font-size:16px;background:transparent}.star.on{color:#1769e0}.pin{font-size:13px}.invalid .title{color:#c62828;font-weight:700}.warning{font-size:10px;color:#c62828;margin-top:2px}.edit{width:100%;border:1px solid #b9c3d1;border-radius:7px;padding:6px;font-size:13px}.memo{width:100%;border:1px solid #d6dbe2;border-radius:7px;padding:6px;margin-top:5px;resize:vertical;font:inherit;font-size:11px}.menu{position:absolute;background:#fff;border:1px solid #ddd;border-radius:8px;box-shadow:0 4px 15px #0002;padding:5px;z-index:20;min-width:145px}.menu button{display:block;width:100%;border:0;text-align:left;padding:7px}.menu button:hover{background:#f3f5f8}dialog{width:min(430px,92vw);max-height:82vh;border:0;border-radius:16px;padding:15px;box-shadow:0 10px 40px #0004}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog-head h2{margin:0;font-size:18px}.dialog-head button{border:0}.hint{font-size:11px;color:#777}.star-row{padding:10px;border-top:1px solid #eee;cursor:grab}.tag{display:inline-block;margin-top:5px;padding:2px 7px;border-radius:999px;font-size:10px}.tag-0{background:#e8f0fe;color:#174ea6}.tag-1{background:#e6f4ea;color:#137333}.tag-2{background:#fef7e0;color:#b06000}.tag-3{background:#fce8e6;color:#b3261e}.tag-4{background:#f3e8fd;color:#7627bb}
+@media(max-width:1560px){.header-actions{gap:5px}.header-actions button,.header-actions .import{font-size:11px;padding:7px 9px}.desktop-clock{font-size:15px}}
+@media(max-width:1420px){.header-actions button,.header-actions .import{font-size:10px;padding:6px 8px}.desktop-clock{font-size:14px}}
+@media(max-width:1024px){.boards{display:block}.board,.size-1,.size-2,.size-3,.size-4,.size-5{width:100%;margin-bottom:12px}header{padding:12px}.header-actions{gap:4px}header p{display:none}}
+header small{font-size:11px;color:#777;font-weight:500}.wide{width:min(720px,94vw)}.report-dialog{width:min(820px,95vw)}.toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:12px 0}.toolbar input{border:1px solid #d9dde5;border-radius:8px;padding:7px}.day-row{display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:11px 4px;border-top:1px solid #eee;align-items:start}.day-row .mini-note{font-size:11px;color:#666;margin-top:3px;white-space:pre-wrap}.day-row.done .day-title{text-decoration:line-through;color:#999}.day-row .tag{margin:0}.empty{padding:32px 8px;text-align:center;color:#888}.range{font-size:13px;font-weight:700;margin:4px 0 10px}.summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.summary span{font-size:11px;background:#f2f4f7;border-radius:999px;padding:5px 9px}.report-text{width:100%;min-height:430px;border:1px solid #d8dde5;border-radius:10px;padding:13px;font:13px/1.6 Arial,'Noto Sans KR',sans-serif;resize:vertical;background:#fbfcfe}
+
+.help-body{font-size:13px;line-height:1.6;color:#34373d}.help-body h3{font-size:14px;margin:16px 0 4px}.help-body p{margin:0;color:#555}.help-body b{color:#202124}
+
+/* v2.3: task actions are revealed on hover/focus */
+.task .icons{opacity:0;visibility:hidden;transition:opacity .12s ease;pointer-events:none}
+.task:hover .icons,.task:focus-within .icons,.task.menu-open .icons{opacity:1;visibility:visible;pointer-events:auto}
+.menu-head{display:flex;justify-content:flex-end;border-bottom:1px solid #eef0f3;margin-bottom:3px;padding-bottom:3px}
+.menu .menu-close{width:auto;display:inline-flex;align-items:center;justify-content:center;font-size:16px;line-height:1;padding:4px 7px;border-radius:6px}
+@media (hover:none){.task .icons{opacity:1;visibility:visible;pointer-events:auto}}
+
+.today-note{font-weight:700;color:#34373d}
+
+.task[draggable=true]{cursor:grab}.task.dragging{opacity:.42}.task.drag-over{outline:2px dashed #8aa9d6;outline-offset:-2px}.tasks.drop-zone{background:#f5f8fd;min-height:48px;border-radius:8px}
+
+/* v2.6: draggable date panel with the same five size levels as boards */
+#dayDialog.day-panel{position:fixed;margin:0;top:78px;right:12px;left:auto;max-height:calc(100vh - 92px);overflow:auto}
+#dayDialog.day-size-1{width:280px}
+#dayDialog.day-size-2{width:320px}
+#dayDialog.day-size-3{width:360px}
+#dayDialog.day-size-4{width:400px}
+#dayDialog.day-size-5{width:440px}
+.day-drag-handle{cursor:move;user-select:none;touch-action:none}
+.day-head-actions{display:flex;align-items:center;gap:6px}
+.day-head-actions select,.day-head-actions button{cursor:pointer}
+@media(max-width:1024px){#dayDialog.day-panel{width:min(94vw,440px)!important;right:3vw;left:auto;top:68px}}
+
+
+/* v2.7: compact Notion-like task cards and full memo display */
+.tasks{display:flex;flex-direction:column;gap:5px;padding:2px 10px 12px}
+.task{border:1px solid #e7eaf0;border-radius:10px;padding:8px 7px;box-shadow:0 1px 2px #00000008;background:#fff}
+.task.pinned{border-color:#dfe5f2;background:#fbfcff}
+.notes{max-height:none;overflow:visible;white-space:pre-wrap;word-break:break-word;margin-top:4px;cursor:text}
+.memo{min-height:72px;max-height:none;overflow:auto}
+
+/* v2.8 */
+.app-title-row{display:flex;align-items:center;gap:5px}.app-title-row h1{margin:0}.title-edit{border:0;background:transparent;color:#9aa0a6;padding:2px 4px;font-size:13px}.version{font-size:10px;color:#9aa0a6;margin-left:2px}.sort-select{width:78px;font-size:11px;border:1px solid #d9dde5;border-radius:7px;padding:4px;background:#fff}.category-edit-row{display:grid;grid-template-columns:18px 1fr auto;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #eef0f3}.category-edit-row input{width:100%;border:1px solid #d9dde5;border-radius:8px;padding:8px}.category-swatch{width:13px;height:13px;border-radius:50%;border:1px solid}.category-color-note{font-size:10px;color:#9aa0a6}.category-add{margin-top:12px}.board-head{gap:5px}.board-head h2{min-width:70px}
+
+
+/* v2.9: manual completed drawer + stale-completed cue + daily thought */
+.task.stale-done{border-color:#9a5b4a;background:#fff8f5}
+.task.stale-done .title,.task.stale-done .notes{color:#8a4939}
+.completed-drawer{margin:2px 10px 12px;border-top:1px solid #e3e6eb;padding-top:5px}
+.completed-toggle{width:100%;border:0;background:transparent;text-align:left;padding:7px 4px;color:#4d5156;display:flex;align-items:center;gap:7px}
+.completed-toggle .chev{width:12px;color:#7b8188;font-size:11px}
+.completed-list{display:flex;flex-direction:column;gap:5px;padding-top:3px}
+.completed-list .task{background:#fafafa}
+.completed-empty{font-size:10px;color:#8b9097;padding:4px 6px 8px;line-height:1.4}
+.daily-quote{position:fixed;left:50%;bottom:7px;transform:translateX(-50%);z-index:4;max-width:min(760px,80vw);padding:5px 12px;border-radius:999px;background:#ffffffde;border:1px solid #e6e9ee;box-shadow:0 1px 4px #0000000d;color:#777;font-size:10px;line-height:1.35;text-align:center;pointer-events:none;white-space:normal}
+body{padding-bottom:34px}
+@media(max-width:1024px){.daily-quote{max-width:92vw;width:max-content;font-size:9px;bottom:4px}}
+
+/* v2.9.1: completed state uses a simple check symbol like Google Tasks */
+.done .check{background:transparent!important;border-color:transparent!important;position:relative}
+.done .check::after{content:'✓';position:absolute;left:0;top:-5px;color:#1769e0;font-size:22px;font-weight:500;line-height:22px}
+
+/* v2.11: improve daily quote readability */
+.daily-quote{bottom:21px;font-size:20px;line-height:1.4;max-width:min(1100px,88vw);padding:7px 16px}
+body{padding-bottom:66px}
+@media(max-width:1024px){.daily-quote{font-size:16px;bottom:16px;max-width:92vw;width:auto;padding:6px 12px}}
+
+
+/* v2.12: precise drag insertion line + completed drawer drop */
+.task.drag-over{outline:none!important}
+.tasks.drop-zone{background:transparent!important;border-radius:0!important}
+.task.drop-before,.task.drop-after{position:relative}
+.task.drop-before::before,.task.drop-after::after{content:'';position:absolute;left:4px;right:4px;height:3px;background:#1769e0;border-radius:3px;z-index:6;box-shadow:0 0 0 1px #fff}
+.task.drop-before::before{top:-4px}.task.drop-after::after{bottom:-4px}
+.tasks.drop-line{position:relative}
+.tasks.drop-line::after{content:'';display:block;height:3px;background:#1769e0;border-radius:3px;margin:3px 4px}
+.completed-drawer.completed-drop{position:relative;background:#f5f9ff;border-radius:8px}
+.completed-drawer.completed-drop::before{content:'';position:absolute;left:4px;right:4px;top:-2px;height:3px;background:#1769e0;border-radius:3px;z-index:7}
+/* quote navigation */
+.daily-quote-wrap{position:fixed;left:50%;bottom:21px;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:6px;max-width:92vw}
+.daily-quote-wrap .daily-quote{position:static;left:auto;bottom:auto;transform:none;max-width:min(1100px,82vw);font-size:20px;line-height:1.4;padding:7px 16px}
+.quote-nav{width:52px;height:52px;padding:0;border:0;background:transparent;color:#9aa0a6;font-size:26px;line-height:52px;border-radius:50%;cursor:pointer;flex:0 0 52px}
+.quote-nav:hover{background:#eef1f5;color:#5f6368}.quote-nav:focus-visible{outline:2px solid #9bbcf5;outline-offset:2px}
+@media(max-width:1024px){.daily-quote-wrap{bottom:16px;max-width:96vw}.daily-quote-wrap .daily-quote{font-size:16px;max-width:78vw;padding:6px 10px}.quote-nav{width:44px;height:44px;line-height:44px;font-size:23px;flex-basis:44px}}
+
+/* v2.13: manual ordering inside date view */
+#dayList .day-row{position:relative;cursor:grab}
+#dayList .day-row.day-dragging{opacity:.42}
+#dayList .day-row.day-drop-before::before,#dayList .day-row.day-drop-after::after{content:'';position:absolute;left:8px;right:8px;height:3px;background:#2f6fed;border-radius:3px;z-index:20;pointer-events:none}
+#dayList .day-row.day-drop-before::before{top:-3px}
+#dayList .day-row.day-drop-after::after{bottom:-3px}
+
+
+/* v2.33.1 FIREBASE AUTH MENUFIX: save-location backup + strict text-selection/edit drag isolation */
+.board-head[draggable=true]{cursor:grab}
+.task.editing,.task.editing *{user-select:text;-webkit-user-select:text}
+.task.editing .edit,.task.editing .memo{cursor:text!important}
+
+/* v2.14: clearer pointer zones, larger controls, one-line daily quote */
+.task[draggable=true]{cursor:grab}
+.task .title,.task .notes{cursor:text;user-select:text;-webkit-user-select:text}
+.task .edit,.task .memo{cursor:text;user-select:text;-webkit-user-select:text}
+.task .check,.task .icon,.task button,.completed-toggle,.day-head-actions button{cursor:pointer}
+.completed-toggle{min-height:42px;padding:8px 6px;gap:9px}
+.completed-toggle .chev{width:24px;min-width:24px;font-size:22px;line-height:1;text-align:center}
+#dayDialog [data-close='dayDialog']{width:46px;height:46px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:24px;line-height:1;border-radius:10px}
+#dayDialog [data-close='dayDialog']:hover{background:#f1f3f4}
+.daily-quote-wrap{width:min(1500px,98vw);justify-content:center}
+.daily-quote-wrap .daily-quote{width:min(1360px,calc(100vw - 140px));max-width:none;white-space:nowrap;overflow:visible;text-overflow:clip}
+@media(max-width:1024px){.daily-quote-wrap .daily-quote{width:auto;max-width:calc(100vw - 100px);white-space:normal}.completed-toggle .chev{font-size:21px}}
+
+  /* v2.33.1 FIREBASE AUTH MENUFIX: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
+  html { zoom: 1.05; }
+  @supports not (zoom: 1.05) {
+    body { transform: scale(1.05); transform-origin: top left; width: 95.2381%; min-height: 95.2381vh; }
+  }
+
+/* v2.33.1 FIREBASE AUTH MENUFIX: 별표 업무 제목 강조 + 화면 설명 모드 */
+.task.starred:not(.done) .title{color:#1769e0;font-weight:700}
+.explain-overlay{position:fixed;inset:0;background:rgba(70,74,80,.58);z-index:99990;cursor:default}
+.explain-lines{position:fixed;inset:0;width:100vw;height:100vh;z-index:99992;pointer-events:none;overflow:visible}
+.explain-lines line{stroke:#e11;stroke-width:1.5;stroke-linecap:round;opacity:.9}
+.explain-label{position:fixed;z-index:99993;background:rgba(255,255,255,.97);color:#d40000;border:1.5px solid #e11;border-radius:6px;padding:4px 7px;font-size:11px;font-weight:800;line-height:1.15;box-shadow:0 2px 7px #0003;pointer-events:none;white-space:nowrap;cursor:default;user-select:none}
+.explain-target{position:relative;z-index:99991!important;box-shadow:0 0 0 2px #ff3b30!important}
+.explain-close{position:fixed;right:22px;top:18px;z-index:99995;width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#d50000;font-size:30px;font-weight:800;line-height:1;box-shadow:0 3px 14px #0005;cursor:pointer}
+.explain-caption{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:99994;background:#fff;color:#d50000;border:1.5px solid #d50000;border-radius:9px;padding:7px 13px;font-size:13px;font-weight:800;pointer-events:none}
+
+@media (pointer:coarse){.boards{display:block}.board,.size-1,.size-2,.size-3,.size-4,.size-5{width:100%;margin-bottom:12px}header{padding:12px}.header-actions{gap:4px}header p{display:none}}
+header small{font-size:11px;color:#777;font-weight:500}.wide{width:min(720px,94vw)}.report-dialog{width:min(820px,95vw)}.toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:12px 0}.toolbar input{border:1px solid #d9dde5;border-radius:8px;padding:7px}.day-row{display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:11px 4px;border-top:1px solid #eee;align-items:start}.day-row .mini-note{font-size:11px;color:#666;margin-top:3px;white-space:pre-wrap}.day-row.done .day-title{text-decoration:line-through;color:#999}.day-row .tag{margin:0}.empty{padding:32px 8px;text-align:center;color:#888}.range{font-size:13px;font-weight:700;margin:4px 0 10px}.summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.summary span{font-size:11px;background:#f2f4f7;border-radius:999px;padding:5px 9px}.report-text{width:100%;min-height:430px;border:1px solid #d8dde5;border-radius:10px;padding:13px;font:13px/1.6 Arial,'Noto Sans KR',sans-serif;resize:vertical;background:#fbfcfe}
+
+.help-body{font-size:13px;line-height:1.6;color:#34373d}.help-body h3{font-size:14px;margin:16px 0 4px}.help-body p{margin:0;color:#555}.help-body b{color:#202124}
+
+/* v2.3: task actions are revealed on hover/focus */
+.task .icons{opacity:0;visibility:hidden;transition:opacity .12s ease;pointer-events:none}
+.task:hover .icons,.task:focus-within .icons,.task.menu-open .icons{opacity:1;visibility:visible;pointer-events:auto}
+.menu-head{display:flex;justify-content:flex-end;border-bottom:1px solid #eef0f3;margin-bottom:3px;padding-bottom:3px}
+.menu .menu-close{width:auto;display:inline-flex;align-items:center;justify-content:center;font-size:16px;line-height:1;padding:4px 7px;border-radius:6px}
+@media (hover:none){.task .icons{opacity:1;visibility:visible;pointer-events:auto}}
+
+.today-note{font-weight:700;color:#34373d}
+
+.task[draggable=true]{cursor:grab}.task.dragging{opacity:.42}.task.drag-over{outline:2px dashed #8aa9d6;outline-offset:-2px}.tasks.drop-zone{background:#f5f8fd;min-height:48px;border-radius:8px}
+
+/* v2.6: draggable date panel with the same five size levels as boards */
+#dayDialog.day-panel{position:fixed;margin:0;top:78px;right:12px;left:auto;max-height:calc(100vh - 92px);overflow:auto}
+#dayDialog.day-size-1{width:280px}
+#dayDialog.day-size-2{width:320px}
+#dayDialog.day-size-3{width:360px}
+#dayDialog.day-size-4{width:400px}
+#dayDialog.day-size-5{width:440px}
+.day-drag-handle{cursor:move;user-select:none;touch-action:none}
+.day-head-actions{display:flex;align-items:center;gap:6px}
+.day-head-actions select,.day-head-actions button{cursor:pointer}
+@media(max-width:1024px){#dayDialog.day-panel{width:min(94vw,440px)!important;right:3vw;left:auto;top:68px}}
+
+
+/* v2.7: compact Notion-like task cards and full memo display */
+.tasks{display:flex;flex-direction:column;gap:5px;padding:2px 10px 12px}
+.task{border:1px solid #e7eaf0;border-radius:10px;padding:8px 7px;box-shadow:0 1px 2px #00000008;background:#fff}
+.task.pinned{border-color:#dfe5f2;background:#fbfcff}
+.notes{max-height:none;overflow:visible;white-space:pre-wrap;word-break:break-word;margin-top:4px;cursor:text}
+.memo{min-height:72px;max-height:none;overflow:auto}
+
+/* v2.8 */
+.app-title-row{display:flex;align-items:center;gap:5px}.app-title-row h1{margin:0}.title-edit{border:0;background:transparent;color:#9aa0a6;padding:2px 4px;font-size:13px}.version{font-size:10px;color:#9aa0a6;margin-left:2px}.sort-select{width:78px;font-size:11px;border:1px solid #d9dde5;border-radius:7px;padding:4px;background:#fff}.category-edit-row{display:grid;grid-template-columns:18px 1fr auto;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #eef0f3}.category-edit-row input{width:100%;border:1px solid #d9dde5;border-radius:8px;padding:8px}.category-swatch{width:13px;height:13px;border-radius:50%;border:1px solid}.category-color-note{font-size:10px;color:#9aa0a6}.category-add{margin-top:12px}.board-head{gap:5px}.board-head h2{min-width:70px}
+
+
+/* v2.9: manual completed drawer + stale-completed cue + daily thought */
+.task.stale-done{border-color:#9a5b4a;background:#fff8f5}
+.task.stale-done .title,.task.stale-done .notes{color:#8a4939}
+.completed-drawer{margin:2px 10px 12px;border-top:1px solid #e3e6eb;padding-top:5px}
+.completed-toggle{width:100%;border:0;background:transparent;text-align:left;padding:7px 4px;color:#4d5156;display:flex;align-items:center;gap:7px}
+.completed-toggle .chev{width:12px;color:#7b8188;font-size:11px}
+.completed-list{display:flex;flex-direction:column;gap:5px;padding-top:3px}
+.completed-list .task{background:#fafafa}
+.completed-empty{font-size:10px;color:#8b9097;padding:4px 6px 8px;line-height:1.4}
+.daily-quote{position:fixed;left:50%;bottom:7px;transform:translateX(-50%);z-index:4;max-width:min(760px,80vw);padding:5px 12px;border-radius:999px;background:#ffffffde;border:1px solid #e6e9ee;box-shadow:0 1px 4px #0000000d;color:#777;font-size:10px;line-height:1.35;text-align:center;pointer-events:none;white-space:normal}
+body{padding-bottom:34px}
+@media(max-width:1024px){.daily-quote{max-width:92vw;width:max-content;font-size:9px;bottom:4px}}
+
+/* v2.9.1: completed state uses a simple check symbol like Google Tasks */
+.done .check{background:transparent!important;border-color:transparent!important;position:relative}
+.done .check::after{content:'✓';position:absolute;left:0;top:-5px;color:#1769e0;font-size:22px;font-weight:500;line-height:22px}
+
+/* v2.11: improve daily quote readability */
+.daily-quote{bottom:21px;font-size:20px;line-height:1.4;max-width:min(1100px,88vw);padding:7px 16px}
+body{padding-bottom:66px}
+@media(max-width:1024px){.daily-quote{font-size:16px;bottom:16px;max-width:92vw;width:auto;padding:6px 12px}}
+
+
+/* v2.12: precise drag insertion line + completed drawer drop */
+.task.drag-over{outline:none!important}
+.tasks.drop-zone{background:transparent!important;border-radius:0!important}
+.task.drop-before,.task.drop-after{position:relative}
+.task.drop-before::before,.task.drop-after::after{content:'';position:absolute;left:4px;right:4px;height:3px;background:#1769e0;border-radius:3px;z-index:6;box-shadow:0 0 0 1px #fff}
+.task.drop-before::before{top:-4px}.task.drop-after::after{bottom:-4px}
+.tasks.drop-line{position:relative}
+.tasks.drop-line::after{content:'';display:block;height:3px;background:#1769e0;border-radius:3px;margin:3px 4px}
+.completed-drawer.completed-drop{position:relative;background:#f5f9ff;border-radius:8px}
+.completed-drawer.completed-drop::before{content:'';position:absolute;left:4px;right:4px;top:-2px;height:3px;background:#1769e0;border-radius:3px;z-index:7}
+/* quote navigation */
+.daily-quote-wrap{position:fixed;left:50%;bottom:21px;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:6px;max-width:92vw}
+.daily-quote-wrap .daily-quote{position:static;left:auto;bottom:auto;transform:none;max-width:min(1100px,82vw);font-size:20px;line-height:1.4;padding:7px 16px}
+.quote-nav{width:52px;height:52px;padding:0;border:0;background:transparent;color:#9aa0a6;font-size:26px;line-height:52px;border-radius:50%;cursor:pointer;flex:0 0 52px}
+.quote-nav:hover{background:#eef1f5;color:#5f6368}.quote-nav:focus-visible{outline:2px solid #9bbcf5;outline-offset:2px}
+@media(max-width:1024px){.daily-quote-wrap{bottom:16px;max-width:96vw}.daily-quote-wrap .daily-quote{font-size:16px;max-width:78vw;padding:6px 10px}.quote-nav{width:44px;height:44px;line-height:44px;font-size:23px;flex-basis:44px}}
+
+/* v2.13: manual ordering inside date view */
+#dayList .day-row{position:relative;cursor:grab}
+#dayList .day-row.day-dragging{opacity:.42}
+#dayList .day-row.day-drop-before::before,#dayList .day-row.day-drop-after::after{content:'';position:absolute;left:8px;right:8px;height:3px;background:#2f6fed;border-radius:3px;z-index:20;pointer-events:none}
+#dayList .day-row.day-drop-before::before{top:-3px}
+#dayList .day-row.day-drop-after::after{bottom:-3px}
+
+
+/* v2.33.1 FIREBASE AUTH MENUFIX: save-location backup + strict text-selection/edit drag isolation */
+.board-head[draggable=true]{cursor:grab}
+.task.editing,.task.editing *{user-select:text;-webkit-user-select:text}
+.task.editing .edit,.task.editing .memo{cursor:text!important}
+
+/* v2.14: clearer pointer zones, larger controls, one-line daily quote */
+.task[draggable=true]{cursor:grab}
+.task .title,.task .notes{cursor:text;user-select:text;-webkit-user-select:text}
+.task .edit,.task .memo{cursor:text;user-select:text;-webkit-user-select:text}
+.task .check,.task .icon,.task button,.completed-toggle,.day-head-actions button{cursor:pointer}
+.completed-toggle{min-height:42px;padding:8px 6px;gap:9px}
+.completed-toggle .chev{width:24px;min-width:24px;font-size:22px;line-height:1;text-align:center}
+#dayDialog [data-close='dayDialog']{width:46px;height:46px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:24px;line-height:1;border-radius:10px}
+#dayDialog [data-close='dayDialog']:hover{background:#f1f3f4}
+.daily-quote-wrap{width:min(1500px,98vw);justify-content:center}
+.daily-quote-wrap .daily-quote{width:min(1360px,calc(100vw - 140px));max-width:none;white-space:nowrap;overflow:visible;text-overflow:clip}
+@media(max-width:1024px){.daily-quote-wrap .daily-quote{width:auto;max-width:calc(100vw - 100px);white-space:normal}.completed-toggle .chev{font-size:21px}}
+
+  /* v2.33.1 FIREBASE AUTH MENUFIX: 기본 UI 배율을 브라우저 105% 확대와 유사하게 조정 */
+  html { zoom: 1.05; }
+  @supports not (zoom: 1.05) {
+    body { transform: scale(1.05); transform-origin: top left; width: 95.2381%; min-height: 95.2381vh; }
+  }
+
+/* v2.33.1 FIREBASE AUTH MENUFIX: 별표 업무 제목 강조 + 화면 설명 모드 */
+.task.starred:not(.done) .title{color:#1769e0;font-weight:700}
+.explain-overlay{position:fixed;inset:0;background:rgba(70,74,80,.58);z-index:99990;cursor:default}
+.explain-lines{position:fixed;inset:0;width:100vw;height:100vh;z-index:99992;pointer-events:none;overflow:visible}
+.explain-lines line{stroke:#e11;stroke-width:1.5;stroke-linecap:round;opacity:.9}
+.explain-label{position:fixed;z-index:99993;background:rgba(255,255,255,.97);color:#d40000;border:1.5px solid #e11;border-radius:6px;padding:4px 7px;font-size:11px;font-weight:800;line-height:1.15;box-shadow:0 2px 7px #0003;pointer-events:none;white-space:nowrap;cursor:default;user-select:none}
+.explain-target{position:relative;z-index:99991!important;box-shadow:0 0 0 2px #ff3b30!important}
+.explain-close{position:fixed;right:22px;top:18px;z-index:99995;width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#d50000;font-size:30px;font-weight:800;line-height:1;box-shadow:0 3px 14px #0005;cursor:pointer}
+.explain-caption{position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:99994;background:#fff;color:#d50000;border:1.5px solid #d50000;border-radius:9px;padding:7px 13px;font-size:13px;font-weight:800;pointer-events:none}
+</style><style>
+@media(max-width:1024px),(pointer:coarse){
+ body{background:#eef0f3!important}
+ .mobile-app{background:#eef0f3!important}
+ .mh{position:sticky;top:0;background:#eef0f3!important;border:0!important;padding:20px 18px 8px!important;text-align:center}
+ .mb{font-size:27px!important;font-weight:800!important;letter-spacing:-.5px}
+ .md{position:absolute;right:16px;top:27px;font-size:11px!important;color:#777}
+ .mtabs{top:64px!important;background:#eef0f3!important;border:0!important;padding:10px 14px 12px!important;gap:4px!important;align-items:end}
+ .mtab{background:transparent!important;color:#202124!important;border-radius:0!important;padding:10px 13px 9px!important;min-height:44px!important;font-size:15px!important;font-weight:750!important;border-bottom:3px solid transparent!important}
+ .mtab.on{color:#1a73e8!important;border-bottom-color:#1a73e8!important}
+ .mmain{padding:4px 12px 36px!important}
+ .mhead{background:#fff;border-radius:18px 18px 0 0;margin:0!important;padding:20px 20px 8px!important;align-items:center}
+ .mhead h2{font-size:21px!important;font-weight:800!important}
+ .mhead p{font-size:12px!important}
+ .mcnt{background:#f1f3f4!important}
+ .mlist{background:#fff;border-radius:0 0 18px 18px;padding:2px 12px 14px!important;gap:0!important}
+ .mcard{grid-template-columns:48px minmax(0,1fr) 48px!important;border:0!important;border-radius:0!important;padding:14px 0!important;background:#fff!important;min-height:82px;align-items:start}
+ .mcard+.mcard{border-top:1px solid #f0f1f2!important}
+ .mcheck,.mstar{width:48px!important;height:48px!important;font-size:27px!important}
+ .mm{padding-top:5px!important}
+ .mttl{font-size:17px!important;line-height:1.42!important;font-weight:650!important;letter-spacing:-.2px}
+ .mmemo{font-size:14px!important;line-height:1.5!important;margin-top:5px!important;color:#5f6368!important}
+ .mcat{font-size:11px!important;padding:3px 7px!important;margin-bottom:5px!important}
+ .mempty{background:#fff!important;min-height:260px;padding-top:72px!important}
+ .mcomp{margin-top:14px!important;border:0!important;border-radius:18px!important;padding:4px 18px!important;background:#fff!important}
+ .mcomp summary{min-height:62px!important;font-size:17px!important;font-weight:800!important}
+ .mquote{font-size:12px!important;margin:26px 16px 8px!important;color:#8a8f94!important}
+}
+</style><style>
+.desktop-clock{position:fixed;top:38px;left:50%;transform:translateX(-50%);z-index:45;font-size:16px;font-weight:800;color:#111;white-space:nowrap;pointer-events:none}
+.past-task-title{color:#8b4a3b!important}
+@media(max-width:1024px),(pointer:coarse){.desktop-clock{display:none!important}}
+</style><style>
+@media(max-width:1024px),(pointer:coarse){
+ .mtabs{display:none!important}
+ .mobile-date-nav{position:sticky;top:62px;z-index:29;display:grid;grid-template-columns:54px 1fr 54px;align-items:center;gap:7px;background:#eef0f3;padding:10px 12px 12px}
+ .mobile-date-nav>button{height:46px;border:0;background:#fff;border-radius:15px;font-size:31px;color:#4d5965;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+ .mobile-date-picker{position:relative;height:46px;background:#fff;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;overflow:hidden}
+ .mobile-date-picker input{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+ .mhead{border-radius:18px 18px 0 0!important}
+ .mcard{touch-action:pan-y}
+ .mcard.mobile-dragging{opacity:.55;background:#f2f6ff!important}
+ .mobile-drop-line{height:3px;background:#1a73e8;border-radius:2px;margin:0 8px}
+ .mobile-drag-hint{font-size:11px;color:#9aa0a6;margin-top:4px}
+}
+</style><style>
+/* v2.29 unified responsive layout */
+.responsive-nav,.mobile-day-inline{display:none}
+@media(max-width:700px){
+ html{zoom:1!important}
+ body{min-width:0!important;overflow-x:hidden!important;background:#f4f6f8!important}
+ header{position:static!important;display:block!important;padding:14px 14px 10px!important}
+ header>div:first-child{min-width:0!important}
+ .app-title-row{flex-wrap:wrap!important;gap:5px!important}
+ #appTitle{font-size:23px!important;line-height:1.2!important;max-width:calc(100vw - 100px)!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+ .title-edit,.version{font-size:11px!important}
+ header>div:first-child>p{display:none!important}
+ .header-actions{margin-top:8px!important;display:flex!important;gap:5px!important;overflow-x:auto!important;white-space:nowrap!important;padding-bottom:3px!important}
+ .header-actions button,.header-actions label{font-size:11px!important;padding:7px 9px!important;min-height:34px!important}
+ #dayView{display:none!important}
+ .desktop-clock{display:none!important}
+
+ .responsive-nav{display:flex!important;gap:7px;overflow-x:auto;scrollbar-width:none;padding:9px 10px 8px;background:#fff;border-top:1px solid #eef0f2;border-bottom:1px solid #e1e5e9;position:sticky;top:0;z-index:50}
+ .responsive-nav::-webkit-scrollbar{display:none}
+ .responsive-pill{flex:0 0 auto;border:1px solid transparent;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;background:#eef1f4;color:#4b5563;min-height:34px}
+ .responsive-pill.active{box-shadow:inset 0 0 0 2px currentColor;background:#fff}
+ .responsive-pill.day{color:#174ea6;background:#e8f0fe}
+ .mobile-day-inline{display:none;padding:10px 9px 26px}
+ .mobile-day-inline.active{display:block!important}
+ .mobile-day-toolbar{display:grid;grid-template-columns:46px minmax(0,1fr) 46px;gap:7px;align-items:center;margin-bottom:9px}
+ .mobile-day-toolbar button,.mobile-day-toolbar input{height:44px;border:1px solid #dfe3e8;background:#fff;border-radius:13px;font-weight:800}
+ .mobile-day-toolbar button{font-size:25px}
+ .mobile-day-toolbar input{padding:0 10px;text-align:center;font-size:15px}
+ .r-day-list{background:#fff;border-radius:16px;overflow:hidden}
+ .r-day-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:7px;align-items:start;padding:14px 10px;border-bottom:1px solid #edf0f2}
+ .r-day-row:last-child{border-bottom:0}
+ .r-day-row .check{width:40px;height:40px;border:0;background:transparent;font-size:28px;line-height:40px;cursor:pointer}
+ .r-day-row .check.done{color:#1a73e8}
+ .r-day-title{font-size:15px;font-weight:800;line-height:1.4;word-break:break-word}
+ .r-day-note{font-size:13px;color:#5f6368;line-height:1.45;margin-top:4px;white-space:pre-wrap;word-break:break-word}
+ .r-day-tag{display:inline-block;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:800;white-space:nowrap;margin-top:1px}
+ .r-empty{padding:48px 16px;text-align:center;color:#8a8f94}
+ main{padding:9px!important}
+ #boards{display:block!important;overflow:visible!important}
+ .board{display:none!important;width:100%!important;max-width:none!important;margin:0!important;min-height:0!important}
+ .board.responsive-active{display:block!important}
+ .board-head{position:static!important}
+ .board .size-select{display:none!important}
+ .task{touch-action:pan-y}
+ .daily-quote-wrap{position:static!important;margin:18px 8px 12px!important;width:auto!important;transform:none!important;left:auto!important;bottom:auto!important}
+ .pomo-test{display:none!important}
+ dialog{max-width:calc(100vw - 18px)!important}
+}
+</style><style>
+/* v2.29.1 responsive stability fixes */
+@media(max-width:700px){
+  body{display:block!important;visibility:visible!important;min-height:100vh!important}
+  header,main,footer,#responsiveNav,#mobileDayInline{visibility:visible!important}
+  .responsive-nav{display:flex!important}
+  #mobileDayInline.active{display:block!important}
+  #boards{width:100%!important}
+  .board.responsive-active{display:block!important}
+}
+</style><style>
+/* v2.29.2 Pomodoro restored */
+.pomo-test{
+ position:fixed;right:18px;bottom:78px;z-index:42;width:230px;
+ background:#fff;border:1px solid #dfe3e8;border-radius:16px;
+ box-shadow:0 5px 20px rgba(0,0,0,.10);padding:12px 14px;
+ font-family:inherit;color:#111;
+}
+.pomo-test.collapsed{width:auto;padding:8px 11px}
+.pomo-test.collapsed .pomo-body{display:none}
+.pomo-top{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;font-weight:800}
+.pomo-top button,.pomo-actions button{border:1px solid #d8dee7;background:#fff;border-radius:9px;cursor:pointer}
+.pomo-top button{width:28px;height:28px}
+.pomo-time{text-align:center;font-size:31px;font-weight:900;letter-spacing:1px;margin:8px 0 9px}
+.pomo-mode{text-align:center;font-size:11px;color:#667085;margin-bottom:8px}
+.pomo-adjust{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin:2px 0 4px}
+.pomo-adjust button{height:28px;border:1px solid #d8dee7;background:#fff;border-radius:8px;cursor:pointer;font-size:11px}
+.pomo-adjust span{text-align:center;font-size:12px;font-weight:800;min-width:42px}
+.pomo-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.pomo-actions button{height:31px;font-size:12px}
+@media(max-width:700px){.pomo-test{display:none!important}}
+</style><style>
+/* v2.31 Today quote: Korean-only display, no truncation */
+.daily-quote-wrap{
+  width:min(1500px,98vw)!important;
+  max-width:98vw!important;
+  justify-content:center!important;
+  align-items:center!important;
+}
+.daily-quote-wrap .daily-quote{
+  width:auto!important;
+  max-width:calc(100vw - 150px)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  word-break:keep-all!important;
+  overflow-wrap:break-word!important;
+  height:auto!important;
+  min-height:0!important;
+  line-height:1.45!important;
+  padding:8px 16px!important;
+}
+@media(max-width:1024px){
+  .daily-quote-wrap{max-width:98vw!important}
+  .daily-quote-wrap .daily-quote{
+    max-width:calc(100vw - 112px)!important;
+    font-size:15px!important;
+    white-space:normal!important;
+  }
+}
+@media(max-width:700px){
+  .daily-quote-wrap .daily-quote{
+    max-width:calc(100vw - 94px)!important;
+    font-size:13px!important;
+    padding:7px 10px!important;
+  }
+}
+</style><style>
+/* v2.32 quote layout: fixed centered navigation above sentence */
+.daily-quote-wrap{
+  position:fixed!important;
+  left:50%!important;
+  bottom:7px!important;
+  transform:translateX(-50%)!important;
+  z-index:40!important;
+  width:min(1500px,96vw)!important;
+  max-width:96vw!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:3px!important;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+.quote-nav-row{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:18px!important;
+  width:100%!important;
+  height:30px!important;
+  pointer-events:auto!important;
+}
+.quote-nav{
+  position:static!important;
+  transform:none!important;
+  width:42px!important;
+  height:28px!important;
+  min-width:42px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:#ffffffee!important;
+  color:#7b8188!important;
+  font-size:20px!important;
+  line-height:1!important;
+  cursor:pointer!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.08)!important;
+}
+.daily-quote{
+  position:static!important;
+  left:auto!important;bottom:auto!important;transform:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  padding:6px 16px 3px!important;
+  border-radius:14px 14px 8px 8px!important;
+  background:#ffffffea!important;
+  border:1px solid #e6e9ee!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.05)!important;
+  color:#666!important;
+  font-size:17px!important;
+  line-height:1.42!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  word-break:keep-all!important;
+  overflow-wrap:break-word!important;
+  pointer-events:none!important;
+}
+.daily-quote-book{
+  width:100%!important;
+  text-align:center!important;
+  color:#999!important;
+  font-size:11px!important;
+  line-height:1.25!important;
+  min-height:14px!important;
+  padding:0 8px 3px!important;
+  pointer-events:none!important;
+}
+body{padding-bottom:118px!important}
+@media(max-width:1024px){
+ .daily-quote-wrap{width:96vw!important;bottom:5px!important}
+ .daily-quote{font-size:14px!important;padding:6px 10px 3px!important}
+ .daily-quote-book{font-size:10px!important}
+ .quote-nav-row{height:27px!important}
+ .quote-nav{width:40px!important;height:26px!important;font-size:18px!important}
+ body{padding-bottom:110px!important}
+}
+@media(max-width:700px){
+ .daily-quote-wrap{width:95vw!important}
+ .daily-quote{font-size:12px!important;line-height:1.4!important}
+ .daily-quote-book{font-size:9px!important}
+ body{padding-bottom:104px!important}
+}
+</style><style>
+.firebase-auth-wrap{display:flex;align-items:center;gap:6px}
+.firebase-auth-btn,.firebase-uid-btn{border:1px solid #d8dee7;background:#fff;border-radius:10px;min-height:36px;padding:0 11px;font-size:12px;font-weight:800;cursor:pointer}
+.firebase-auth-btn.signed-in{color:#137333;border-color:#b7dfc5;background:#f0fbf4}
+.firebase-uid-btn{display:none;color:#174ea6}
+.firebase-auth-status{position:fixed;right:18px;top:76px;z-index:80;max-width:min(430px,calc(100vw - 36px));background:#fff;border:1px solid #dfe3e8;border-radius:14px;padding:10px 12px;box-shadow:0 5px 20px rgba(0,0,0,.10);font-size:12px;line-height:1.45;display:none}
+.firebase-auth-status.show{display:block}
+.firebase-auth-status .muted{color:#6b7280;font-size:11px}
+@media(max-width:700px){.firebase-auth-status{top:112px;right:10px;left:10px;max-width:none}}
+</style></head><body><div id="desktopClock" class="desktop-clock"></div>
+<header><div><div class='app-title-row'><h1 id='appTitle'>업무보드</h1><button id='editAppTitle' class='title-edit' title='업무보드 이름 수정'>✎</button><small class='version'>v2.33.1 FIREBASE AUTH MENUFIX</small></div><p>날짜 | 분류 | 내용</p></div><div class='header-actions'><button id='categorySettings'>⚙ 대분류 설정</button><button id='helpView'>ⓘ 사용방법</button><button id='dayView'>📅 날짜별 할 일</button><button id='weekView'>▦ 주간보고</button><button id='starView'>★ 별표 업무</button><button id='exportBtn'>백업</button><label class='import'>복원<input id='importFile' type='file' accept='.json'></label><button id='explainView' type='button'>설명</button></div></header><nav id='responsiveNav' class='responsive-nav' aria-label='모바일 보기 전환'></nav>
+<section id='mobileDayInline' class='mobile-day-inline'>
+  <div class='mobile-day-toolbar'>
+    <button id='rPrevDay' type='button'>‹</button>
+    <input id='rDayPicker' type='date'>
+    <button id='rNextDay' type='button'>›</button>
+  </div>
+  <div id='rDayList' class='r-day-list'></div>
+</section>
+<main><section id='boards' class='boards'></section></main><footer class='daily-quote-wrap' title='니체 대표 문장과 저작 기반 문장 365개'>
+  <div class='quote-nav-row'>
+    <button id='quotePrev' class='quote-nav' aria-label='이전 문장'>‹</button>
+    <button id='quoteNext' class='quote-nav' aria-label='다음 문장'>›</button>
+  </div>
+  <div id='dailyQuote' class='daily-quote'></div>
+  <div id='dailyQuoteBook' class='daily-quote-book'></div>
+</footer>
+<dialog id='dayDialog' class='day-panel day-size-2'><div class='dialog-head day-drag-handle'><h2>날짜별 할 일</h2><div class='day-head-actions'><select id='daySizeSelect' class='size-select' title='날짜별 할 일 크기'><option value='1'>-1</option><option value='2' selected>기본</option><option value='3'>+1</option><option value='4'>+2</option><option value='5'>+3</option></select><button data-close='dayDialog'>✕</button></div></div><div class='toolbar'><button id='prevDay'>‹</button><input id='dayPicker' type='date'><button id='nextDay'>›</button><button id='todayBtn'>오늘</button></div><div id='dayList'></div></dialog>
+<dialog id='weekDialog' class='report-dialog'><div class='dialog-head'><h2>주간보고 자동출력</h2><button data-close='weekDialog'>✕</button></div><div class='toolbar'><button id='prevWeek'>‹ 이전 주</button><input id='weekPicker' type='date'><button id='nextWeek'>다음 주 ›</button><button id='thisWeekBtn'>이번 주</button><button id='copyReport'>보고서 복사</button></div><div id='weekRange' class='range'></div><div id='weekSummary' class='summary'></div><textarea id='reportText' class='report-text' readonly></textarea></dialog>
+<dialog id='categoryDialog' class='wide'><div class='dialog-head'><h2>대분류 설정</h2><button data-close='categoryDialog'>✕</button></div><p class='hint'>보드 안에서는 대분류 이름을 바꾸지 않습니다. 여기에서 표시 이름을 수정하거나 새 대분류를 추가할 수 있습니다.</p><div id='categoryEditor'></div><button id='addCategory' class='category-add'>＋ 대분류 추가</button></dialog>
+<dialog id='helpDialog' class='wide'><div class='dialog-head'><h2>사용방법</h2><button data-close='helpDialog'>✕</button></div><div class='help-body'>
+<h3>1. 업무보드 이름</h3><p>왼쪽 상단 업무보드 이름 옆의 작은 회색 <b>✎</b>를 눌러 ‘김우중의 업무보드’처럼 원하는 이름으로 바꿀 수 있습니다.</p><h3>2. 업무 작성</h3><p>제목은 <b>10.02 | 분류 | 내용</b> 형식으로 작성합니다. 제목 입력창에서 스페이스바를 두 번 누르면 <b> | </b>가 자동 입력됩니다. 형식이 맞지 않아도 저장되지만 빨간색으로 수정 필요 상태가 표시됩니다.</p>
+<h3>3. 대분류 보드</h3><p>기본 5개 대분류 보드를 제공하며 상단 <b>⚙ 대분류 설정</b>에서 이름을 수정하거나 새 대분류를 추가할 수 있습니다. 이름을 바꿔도 기존 업무와 색상은 유지됩니다. 보드는 드래그하여 순서를 바꿀 수 있고, -1·기본·+1·+2·+3의 5단계로 폭을 조절합니다.</p>
+<h3>4. 할 일 관리</h3><p>○를 눌러 완료 처리합니다. 완료한 업무는 바로 사라지지 않으며, 필요할 때 ⋮ 메뉴의 <b>완료됨으로 이동</b>을 눌러 보드 하단의 서랍으로 직접 옮깁니다. 날짜가 지난 완료 업무가 아직 서랍으로 이동되지 않았다면 적갈색으로 표시됩니다. ☆를 누르면 중요 업무로 별표 표시되며 ★ 별표 업무에서 모아볼 수 있습니다. 할 일 카드를 드래그해 같은 보드의 위·아래 또는 다른 보드로 이동할 수 있습니다. 제목·메모 글자 위에서는 텍스트 선택과 편집이 우선되며 카드가 움직이지 않습니다. 특히 수정 모드의 입력창 안에서 마우스를 끌면 텍스트만 선택되고 업무 카드나 보드 이동은 시작되지 않습니다. 편집 중 <b>ESC</b>를 누르면 빈 공간을 클릭한 것처럼 수정 모드가 종료되고 입력 내용이 저장됩니다.</p>
+<h3>5. 메모·고정·정렬</h3><p>업무 메모는 전체 내용이 표시되며 메모를 더블클릭하면 바로 수정할 수 있습니다. 고정 업무는 항상 보드 상단에 유지됩니다. 각 보드의 정렬 메뉴에서 <b>수동순서 / 최신순 / 과거순</b>을 선택할 수 있으며 기본값은 최신순입니다.</p>
+<h3>6. 날짜별 할 일</h3><p>상단 <b>날짜별 할 일</b>에서 를 대분류 색상 태그와 함께 모아봅니다. 업무 카드는 마우스로 드래그해 위·아래 순서를 직접 바꿀 수 있으며, 삽입 위치는 카드 사이의 <b>파란색 선</b>으로 표시됩니다. 날짜별 화면에서 정한 순서는 원래 대분류 보드 순서와 별도로 저장됩니다. 패널은 오른쪽 벽에 붙어 열리고 -1·기본·+1·+2·+3으로 크기를 바꿔도 오른쪽 정렬을 유지합니다. 패널을 직접 드래그한 뒤에는 사용자가 옮긴 위치를 기준으로 유지합니다. 우측 상단의 큰 X 버튼과 넓은 클릭 영역으로 패널을 쉽게 닫을 수 있습니다.</p>
+<h3>7. 주간보고</h3><p><b>주간보고</b>에서 선택한 주의 완료업무, 미완료·이월, 차주 예정 업무를 자동 집계하고 보고서 텍스트를 복사할 수 있습니다.</p>
+<h3>8. 완료됨 서랍</h3><p>완료 업무가 생기면 보드 하단에 <b>완료됨(개수)</b> 서랍이 나타납니다. 완료 체크한 업무는 ⋮ 메뉴뿐 아니라 마우스로 <b>완료됨 서랍에 드래그</b>하여 직접 옮길 수 있습니다. 업무를 드래그할 때 실제 삽입 위치는 카드 사이의 <b>파란색 선</b>으로 표시됩니다. 앞의 큰 화살표 또는 제목 영역을 눌러 접거나 펼칠 수 있습니다.</p><h3>9. 오늘의 문장</h3><p>화면 하단 중앙에 니체의 위버멘쉬·초월·자기극복 사상을 바탕으로 다듬은 365개의 문장이 날짜별로 표시됩니다. 좌우의 ‹ › 버튼은 넓은 클릭 영역으로 쉽게 선택할 수 있고 다른 문장도 볼 수 있으며 날짜가 바뀌면 그날의 문장으로 시작합니다. PC에서는 긴 문장도 한 줄로 볼 수 있도록 문장 영역을 넓게 사용합니다.</p><h3>10. 백업·복원</h3><p>업무 데이터는 현재 브라우저에 자동 저장됩니다. <b>백업</b>을 누르면 지원되는 Chrome/Whale 환경에서는 저장 위치 선택 창이 열리며 원하는 폴더와 파일명을 지정해 JSON으로 저장할 수 있습니다. 브라우저가 이 기능을 지원하지 않으면 일반 다운로드 방식으로 백업됩니다. 필요할 때 <b>복원</b>으로 불러오세요.</p>
+<h3>설명 모드</h3><p><b>설명</b>을 누르면 화면이 잠기고 주요 UI의 공식 명칭이 빨간색으로 표시됩니다. ESC 또는 우측 상단 ×로 종료합니다. ★ 별표를 선택한 업무는 업무 제목도 별표와 같은 색상으로 강조됩니다.</p></div></dialog>
+<dialog id='starDialog'><div class='dialog-head'><h2>★ 별표 할 일</h2><button data-close='starDialog'>✕</button></div><p class='hint'>드래그해서 사이드바 우선순서를 바꿀 수 있습니다.</p><div id='starList'></div></dialog>
+<script>const KEY='mason-workboard-v1';
+const COLORS=['#e8f0fe|#174ea6','#e6f4ea|#137333','#fef7e0|#b06000','#fce8e6|#b3261e','#f3e8fd|#7627bb','#e0f7fa|#006064','#fff3e0|#e65100','#f1f8e9|#33691e','#eceff1|#37474f','#fce4ec|#880e4f'];
+const defaultData={appTitle:'업무보드',boards:[
+{id:'edu',name:'①교육관리',displayName:'교육관리',desc:'▶과정·홈페이지·콘텐츠·강사 관련',size:2,sort:'latest',color:COLORS[0],tasks:[]},
+{id:'ops',name:'②운영관리',displayName:'운영관리',desc:'▶강의장·시간표·행사·특강 운영',size:2,sort:'latest',color:COLORS[1],tasks:[]},
+{id:'biz',name:'③사업관리',displayName:'사업관리',desc:'▶K-Move·신규사업·사업보고',size:2,sort:'latest',color:COLORS[2],tasks:[]},
+{id:'hr',name:'④인사관리',displayName:'인사관리',desc:'▶채용·직원면담·직원교육',size:2,sort:'latest',color:COLORS[3],tasks:[]},
+{id:'etc',name:'⑤기타업무',displayName:'기타업무',desc:'▶기안·시스템 세팅·기타 행정',size:2,sort:'latest',color:COLORS[4],tasks:[]}
+],starOrder:[],ui:{daySize:2,dayOrders:{}}};
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||structuredClone(defaultData);
+function migrate(){
+ if(!data.starOrder)data.starOrder=[]; if(!data.ui)data.ui={}; if(!data.ui.daySize)data.ui.daySize=2; if(!data.ui.dayOrders||typeof data.ui.dayOrders!=='object')data.ui.dayOrders={}; if(!data.appTitle)data.appTitle='업무보드';
+ data.boards.forEach((b,i)=>{if(!b.size)b.size=2;if(!b.displayName)b.displayName=(b.name||'대분류').replace(/^[①②③④⑤⑥⑦⑧⑨⑩\d.\s]+/,'');if(!b.sort)b.sort='latest';if(!b.color)b.color=COLORS[i%COLORS.length];if(!Array.isArray(b.tasks))b.tasks=[];if(typeof b.completedOpen!=='boolean')b.completedOpen=false;b.tasks.forEach(t=>{if(typeof t.archivedDone!=='boolean')t.archivedDone=false})});
+}
+migrate();
+let undoStack=[];
+let lastSavedSnapshot=JSON.stringify(data);
+let undoing=false;
+function save(){
+ const next=JSON.stringify(data);
+ if(!undoing && next!==lastSavedSnapshot){
+   undoStack.push(lastSavedSnapshot);
+   if(undoStack.length>50)undoStack.shift();
+ }
+ localStorage.setItem(KEY,next);
+ lastSavedSnapshot=next;
+}
+function undoLastAction(){
+ if(!undoStack.length)return;
+ const prev=undoStack.pop();
+ undoing=true;
+ try{
+   data=JSON.parse(prev);
+   migrate();
+   localStorage.setItem(KEY,JSON.stringify(data));
+   lastSavedSnapshot=JSON.stringify(data);
+   render();
+   renderDayIfOpen();
+   renderStars();
+   if(typeof renderResponsiveDay==='function')renderResponsiveDay();
+ }finally{undoing=false}
+}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function validTitle(s){return /^\d{2}\.\d{2}\s\|\s[^|]+\s\|\s.+$/.test((s||'').trim())}
+function parts(s=''){const m=s.trim().match(/^(\d{2})\.(\d{2})\s\|\s([^|]+)\s\|\s(.+)$/);return m?{md:m[1]+'.'+m[2],month:+m[1],day:+m[2],sub:m[3].trim(),content:m[4].trim()}:null}
+function dateForTask(t,anchor=new Date()){const p=parts(t.title);if(!p)return null;let y=anchor.getFullYear();let d=new Date(y,p.month-1,p.day);const diff=(d-anchor)/(864e5);if(diff>180)y--;else if(diff<-180)y++;return new Date(y,p.month-1,p.day)}
+function localISO(d){const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`}
+function startOfWeek(d){const x=new Date(d);x.setHours(0,0,0,0);const day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function fmt(d){return `${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`}
+function boardLabel(b){return b.displayName||b.name||'대분류'}
+function allTasks(){return data.boards.flatMap((b,bi)=>b.tasks.map(t=>({t,b,bi})))}
+function tagStyle(b){const [bg,fg]=(b.color||COLORS[0]).split('|');return `background:${bg};color:${fg}`}
+function taskSort(b){
+ const active=b.tasks.filter(t=>!t.archivedDone), pinned=active.filter(t=>t.pinned), normal=active.filter(t=>!t.pinned); if(b.sort==='manual')return [...pinned,...normal];
+ const dir=b.sort==='oldest'?1:-1; const anchor=new Date();
+ normal.sort((a,c)=>{const da=dateForTask(a,anchor),dc=dateForTask(c,anchor);if(!da&&!dc)return 0;if(!da)return 1;if(!dc)return -1;return (da-dc)*dir});
+ return [...pinned,...normal];
+}
+function render(){
+ document.querySelector('#appTitle').textContent=data.appTitle; const root=document.querySelector('#boards');root.innerHTML='';
+ data.boards.forEach((b,bi)=>{const el=document.createElement('article');el.className=`board size-${b.size}`;el.draggable=false;el.dataset.bi=bi;el.innerHTML=`<div class='board-head' draggable='true'><h2>${escapeHtml(boardLabel(b))}</h2><select class='sort-select' title='정렬'><option value='manual' ${b.sort==='manual'?'selected':''}>수동순서</option><option value='latest' ${b.sort==='latest'?'selected':''}>최신순</option><option value='oldest' ${b.sort==='oldest'?'selected':''}>과거순</option></select><select class='size-select' title='보드 크기'><option value='1' ${b.size==1?'selected':''}>-1</option><option value='2' ${b.size==2?'selected':''}>기본</option><option value='3' ${b.size==3?'selected':''}>+1</option><option value='4' ${b.size==4?'selected':''}>+2</option><option value='5' ${b.size==5?'selected':''}>+3</option></select></div><button class='add'>⊕ 할 일 추가</button><div class='tasks'></div>`;root.appendChild(el);
+ el.querySelector('.size-select').onchange=e=>{b.size=+e.target.value;save();render()};el.querySelector('.sort-select').onchange=e=>{b.sort=e.target.value;save();render()};el.querySelector('.add').onclick=()=>addTask(b);const tasks=el.querySelector('.tasks');taskSort(b).forEach(t=>tasks.appendChild(taskEl(t,b)));renderCompletedDrawer(el,b);
+ });bindTaskDnD();bindBoardDnD();syncResponsiveAfterRender();
+}
+
+let responsiveView='day';
+function responsiveColorStyle(b){
+ const raw=(b.color||COLORS[0]);
+ const parts=String(raw).split('|');
+ return {bg:parts[0]||'#eef1f4',fg:parts[1]||'#374151'};
+}
+function buildResponsiveNav(){
+ const nav=document.querySelector('#responsiveNav'); if(!nav)return;
+ nav.innerHTML='';
+ const day=document.createElement('button');day.className='responsive-pill day'+(responsiveView==='day'?' active':'');day.textContent='날짜별 할 일';
+ day.onclick=()=>setResponsiveView('day');nav.appendChild(day);
+ data.boards.forEach(b=>{const c=responsiveColorStyle(b),btn=document.createElement('button');btn.className='responsive-pill'+(responsiveView===b.id?' active':'');btn.textContent=boardLabel(b);btn.style.background=c.bg;btn.style.color=c.fg;btn.onclick=()=>setResponsiveView(b.id);nav.appendChild(btn)});
+}
+function setResponsiveView(v){
+ responsiveView=v;
+ buildResponsiveNav();
+ const day=document.querySelector('#mobileDayInline'); if(day)day.classList.toggle('active',v==='day');
+ document.querySelectorAll('#boards .board').forEach(el=>el.classList.toggle('responsive-active',v!=='day' && el.dataset.boardId===v));
+ if(v==='day')renderResponsiveDay();
+}
+function renderResponsiveDay(){
+ const picker=document.querySelector('#rDayPicker'); if(!picker)return;
+ if(!picker.value)picker.value=localISO(new Date());
+ const chosen=new Date(picker.value+'T00:00:00');
+ let rows=allTasks().filter(x=>{const d=dateForTask(x.t,chosen);return d&&localISO(d)===picker.value&&!x.t.pinned&&!x.t.archivedDone});
+ const key=picker.value,ids=rows.map(x=>x.t.id);let order=(data.ui.dayOrders[key]||[]).filter(id=>ids.includes(id));ids.forEach(id=>{if(!order.includes(id))order.push(id)});
+ const pos=new Map(order.map((id,i)=>[id,i]));rows.sort((a,b)=>(pos.get(a.t.id)??9999)-(pos.get(b.t.id)??9999));
+ const root=document.querySelector('#rDayList');root.innerHTML='';
+ if(!rows.length){root.innerHTML=`<div class='r-empty'>${fmt(chosen)}에 등록된 업무가 없습니다.</div>`;return}
+ rows.forEach(x=>{
+   const el=document.createElement('div');el.className='r-day-row';
+   const check=document.createElement('button');check.className='check'+(x.t.done?' done':'');check.textContent=x.t.done?'✓':'○';check.onclick=()=>{toggleDone(x.t);renderResponsiveDay()};
+   const body=document.createElement('div');const title=document.createElement('div');title.className='r-day-title';title.textContent=x.t.title||'';body.appendChild(title);
+   if(x.t.note){const note=document.createElement('div');note.className='r-day-note';note.textContent=x.t.note;body.appendChild(note)}
+   const tag=document.createElement('span');tag.className='r-day-tag';tag.textContent='#'+boardLabel(x.b);const c=responsiveColorStyle(x.b);tag.style.background=c.bg;tag.style.color=c.fg;
+   el.append(check,body,tag);root.appendChild(el);
+ });
+}
+function syncResponsiveAfterRender(){
+ buildResponsiveNav();
+ const day=document.querySelector('#mobileDayInline');
+ if(day)day.classList.toggle('active',responsiveView==='day');
+ document.querySelectorAll('#boards .board').forEach((el,i)=>{el.dataset.boardId=data.boards[i]?.id||'';el.classList.toggle('responsive-active',responsiveView!=='day'&&el.dataset.boardId===responsiveView)});
+ if(responsiveView==='day')renderResponsiveDay();
+}
+function taskEl(t,b){const el=document.createElement('div');el.draggable=!t.archivedDone;el.dataset.taskId=t.id;el.dataset.boardId=b.id;const td=dateForTask(t,new Date());const today=new Date();today.setHours(0,0,0,0);const isToday=td&&localISO(td)===localISO(today);const isStaleDone=t.done&&!t.archivedDone&&td&&td<today;el.className='task'+(t.done?' done':'')+(t.archivedDone?' archived-done':'')+(isStaleDone?' stale-done':'')+(t.pinned?' pinned':'')+(t.star?' starred':'')+(!t.pinned&&!validTitle(t.title)?' invalid':'');el.innerHTML=`<span class='check'></span><div><div class='title'></div>${t.note?`<div class='notes'></div>`:''}${(!t.pinned&&!validTitle(t.title))?`<div class='warning'>형식 확인: 10.02 | 분류 | 내용</div>`:''}</div><div class='icons'><button class='icon star ${t.star?'on':''}' title='별표'>${t.star?'★':'☆'}</button>${t.pinned?`<span class='pin'>📌</span>`:''}<button class='icon more'>⋮</button></div>`;el.querySelector('.title').textContent=t.title;if(t.note){el.querySelector('.notes').textContent=t.note;if(isToday)el.querySelector('.notes').classList.add('today-note')}el.querySelector('.check').onclick=()=>toggleDone(t);el.querySelector('.star').onclick=()=>{t.star=!t.star;if(t.star&&!data.starOrder.includes(t.id))data.starOrder.push(t.id);save();render();renderStars()};el.querySelector('.more').onclick=e=>showMenu(e.currentTarget,t,b,el);el.querySelector('.title').ondblclick=()=>editTask(el,t,false,'title');const noteEl=el.querySelector('.notes');if(noteEl)noteEl.ondblclick=e=>{e.stopPropagation();editTask(el,t,false,'memo')};return el}
+function toggleDone(t){t.done=!t.done;t.completedAt=t.done?new Date().toISOString():null;if(!t.done)t.archivedDone=false;save();render();if(document.querySelector('#dayDialog')?.open)renderDay();if(document.querySelector('#weekDialog')?.open)renderWeek();if(window.innerWidth<=700&&responsiveView==='day')renderResponsiveDay()}
+function addTask(b){const t={id:uid(),title:'',note:'',done:false,archivedDone:false,star:false,pinned:false,createdAt:new Date().toISOString(),completedAt:null};b.tasks.unshift(t);save();render();const board=[...document.querySelectorAll('.board')][data.boards.indexOf(b)];const row=board.querySelector(`[data-task-id='${t.id}']`);editTask(row,t,true)}
+function editTask(el,t,newOne=false,focusTarget='title'){el.draggable=false;el.classList.add('editing');const box=el.querySelector('.title');box.innerHTML=`<input class='edit' value='${escapeHtml(t.title)}' placeholder='10.02 | 분류 | 내용'><textarea class='memo' placeholder='메모'>${escapeHtml(t.note||'')}</textarea>`;const input=box.querySelector('input'),memo=box.querySelector('textarea');[input,memo].forEach(ctrl=>{ctrl.draggable=false;ctrl.addEventListener('dragstart',e=>e.stopPropagation());ctrl.addEventListener('pointerdown',e=>e.stopPropagation());ctrl.addEventListener('mousedown',e=>e.stopPropagation())});if(focusTarget==='memo'){memo.focus();memo.setSelectionRange(memo.value.length,memo.value.length)}else input.focus();let last=0,finished=false;const onKey=e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();finish();return}if(e.currentTarget===input&&e.code==='Space'){const now=Date.now();if(now-last<450){e.preventDefault();input.value=input.value.replace(/\s+$/,'')+' | ';last=0}else last=now}if(e.currentTarget===input&&e.key==='Enter'){e.preventDefault();finish()}};input.addEventListener('keydown',onKey);memo.addEventListener('keydown',onKey);box.addEventListener('focusout',()=>setTimeout(()=>{if(finished||!document.body.contains(input))return;if(box.contains(document.activeElement))return;finish()},80));function finish(){if(finished||!document.body.contains(input))return;finished=true;t.title=input.value.trim();t.note=memo.value.trim();if(newOne&&!t.title){const loc=allTasks().find(x=>x.t.id===t.id);if(loc)loc.b.tasks=loc.b.tasks.filter(x=>x.id!==t.id)}save();render()}}
+function closeTaskMenu(){const m=document.querySelector('.menu');if(m)m.remove();document.querySelectorAll('.task.menu-open').forEach(x=>x.classList.remove('menu-open'))}
+function showMenu(btn,t,b,row){closeTaskMenu();row.classList.add('menu-open');const m=document.createElement('div');m.className='menu';const move=data.boards.filter(x=>x!==b).map(x=>`<button data-move='${x.id}'>이동 → ${escapeHtml(boardLabel(x))}</button>`).join('');m.innerHTML=`<div class='menu-head'><button class='menu-close' type='button'>×</button></div><button data-a='edit'>수정</button><button data-a='up'>↑ 위로 이동</button><button data-a='down'>↓ 아래로 이동</button><button data-a='pin'>${t.pinned?'고정 해제':'상단 고정'}</button>${t.done?`<button data-a='archive'>${t.archivedDone?'완료됨에서 꺼내기':'완료됨으로 이동'}</button>`:''}${move}<button data-a='del'>삭제</button>`;document.body.appendChild(m);const r=btn.getBoundingClientRect();m.style.left=Math.min(r.left,innerWidth-180)+'px';m.style.top=(r.bottom+scrollY)+'px';m.querySelector('.menu-close').onclick=e=>{e.stopPropagation();closeTaskMenu()};m.onclick=e=>{e.stopPropagation();const a=e.target.dataset.a,move=e.target.dataset.move;if(!a&&!move)return;if(a==='up'||a==='down'){b.sort='manual';const i=b.tasks.findIndex(x=>x.id===t.id),j=a==='up'?i-1:i+1;if(i>=0&&j>=0&&j<b.tasks.length)[b.tasks[i],b.tasks[j]]=[b.tasks[j],b.tasks[i]]}else if(a==='pin')t.pinned=!t.pinned;else if(a==='archive'){t.archivedDone=!t.archivedDone;if(t.archivedDone)t.pinned=false;}else if(a==='del')b.tasks=b.tasks.filter(x=>x.id!==t.id);else if(move){const dest=data.boards.find(x=>x.id===move);b.tasks=b.tasks.filter(x=>x.id!==t.id);dest.tasks.unshift(t)}else if(a==='edit'){closeTaskMenu();editTask(row,t);return}save();closeTaskMenu();render()}}
+document.addEventListener('pointerdown',e=>{const m=document.querySelector('.menu');if(m&&!m.contains(e.target)&&!e.target.closest('.more'))closeTaskMenu()});
+function bindTaskDnD(){
+ let dragId=null,fromBoardId=null;
+ const clear=()=>document.querySelectorAll('.drop-before,.drop-after,.drop-line,.completed-drop').forEach(x=>x.classList.remove('drop-before','drop-after','drop-line','completed-drop'));
+ function takeTask(id,fromId){const from=data.boards.find(b=>b.id===fromId);if(!from)return null;const idx=from.tasks.findIndex(t=>t.id===id);if(idx<0)return null;return {from,task:from.tasks[idx],idx}}
+ function moveTask(id,fromId,toId,targetId=null,after=false){const info=takeTask(id,fromId),to=data.boards.find(b=>b.id===toId);if(!info||!to)return;info.from.sort='manual';to.sort='manual';const [task]=info.from.tasks.splice(info.idx,1);let at=targetId?to.tasks.findIndex(t=>t.id===targetId):-1;if(at<0)at=to.tasks.length;else if(after)at++;to.tasks.splice(at,0,task);save();render()}
+ function archiveByDrop(id,fromId,toId){const info=takeTask(id,fromId),to=data.boards.find(b=>b.id===toId);if(!info||!to||!info.task.done)return;if(info.from!==to)info.from.tasks.splice(info.idx,1);const task=info.task;task.archivedDone=true;task.pinned=false;if(info.from!==to)to.tasks.push(task);save();render()}
+ document.querySelectorAll('.tasks > .task').forEach(row=>{
+  row.addEventListener('dragstart',e=>{if(e.target.closest('.title,.notes,.edit,.memo,input,textarea')){e.preventDefault();return}dragId=row.dataset.taskId;fromBoardId=row.dataset.boardId;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragId);e.stopPropagation()});
+  row.addEventListener('dragend',()=>{row.classList.remove('dragging');clear();dragId=fromBoardId=null});
+  row.addEventListener('dragover',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();e.stopPropagation();clear();const r=row.getBoundingClientRect();row.classList.add(e.clientY>r.top+r.height/2?'drop-after':'drop-before')});
+  row.addEventListener('drop',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();e.stopPropagation();const r=row.getBoundingClientRect();moveTask(dragId,fromBoardId,row.dataset.boardId,row.dataset.taskId,e.clientY>r.top+r.height/2);clear()})
+ });
+ document.querySelectorAll('.board .tasks').forEach(zone=>{const board=zone.closest('.board'),toId=data.boards[+board.dataset.bi].id;zone.addEventListener('dragover',e=>{if(!dragId||e.target.closest('.task'))return;e.preventDefault();e.stopPropagation();clear();zone.classList.add('drop-line')});zone.addEventListener('drop',e=>{if(!dragId||e.target.closest('.task'))return;e.preventDefault();e.stopPropagation();moveTask(dragId,fromBoardId,toId);clear()})});
+ document.querySelectorAll('.completed-drawer').forEach(drawer=>{const board=drawer.closest('.board'),toId=data.boards[+board.dataset.bi].id;drawer.addEventListener('dragover',e=>{if(!dragId)return;const info=takeTask(dragId,fromBoardId);if(!info?.task.done)return;e.preventDefault();e.stopPropagation();clear();drawer.classList.add('completed-drop')});drawer.addEventListener('drop',e=>{if(!dragId)return;e.preventDefault();e.stopPropagation();archiveByDrop(dragId,fromBoardId,toId);clear()})});
+}
+function bindBoardDnD(){let from=null;document.querySelectorAll('.board').forEach(el=>{const head=el.querySelector('.board-head');head.ondragstart=e=>{if(e.target.closest('select,button')){e.preventDefault();return}from=+el.dataset.bi;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain','board:'+from)};head.ondragend=()=>from=null;el.ondragover=e=>{if(from!==null)e.preventDefault()};el.ondrop=e=>{if(from===null)return;e.preventDefault();const to=+el.dataset.bi;if(from===to){from=null;return}const [x]=data.boards.splice(from,1);data.boards.splice(to,0,x);from=null;save();render()}})}
+function renderStars(){
+ const root=document.querySelector('#starList');if(!root)return;
+ const rows=allTasks().filter(x=>x.t.star);
+ const anchor=new Date();
+ rows.sort((a,b)=>{
+   const da=dateForTask(a.t,anchor),db=dateForTask(b.t,anchor);
+   if(da&&db){const d=da-db;if(d)return d}
+   else if(da)return -1;
+   else if(db)return 1;
+   return String(a.t.title||'').localeCompare(String(b.t.title||''),'ko');
+ });
+ root.innerHTML='';
+ rows.forEach(x=>{
+   const el=document.createElement('div');el.className='star-row';
+   el.innerHTML=`<div>${x.t.done?'✓':'○'} ${escapeHtml(x.t.title)}${x.t.note?`<div class='notes'>${escapeHtml(x.t.note)}</div>`:''}</div><span class='tag' style='${tagStyle(x.b)}'>#${escapeHtml(boardLabel(x.b))}</span>`;
+   root.appendChild(el)
+ });
+}
+function renderCompletedDrawer(boardEl,b){
+ const archived=b.tasks.filter(t=>t.done&&t.archivedDone);const hasDone=b.tasks.some(t=>t.done);
+ if(!hasDone&&!archived.length)return;
+ const wrap=document.createElement('section');wrap.className='completed-drawer'+(b.completedOpen?' open':'');
+ wrap.innerHTML=`<button class='completed-toggle' type='button'><span class='chev'>${b.completedOpen?'▾':'▸'}</span><b>완료됨(${archived.length})</b></button><div class='completed-list'></div>`;
+ const list=wrap.querySelector('.completed-list');
+ if(b.completedOpen){if(!archived.length)list.innerHTML="<div class='completed-empty'>완료된 업무의 ⋮ 메뉴에서 ‘완료됨으로 이동’을 선택하세요.</div>";else archived.forEach(t=>{const row=taskEl(t,b);row.draggable=false;list.appendChild(row)})}
+ wrap.querySelector('.completed-toggle').onclick=()=>{b.completedOpen=!b.completedOpen;save();render()};boardEl.appendChild(wrap);
+}
+const DAILY_THOUGHTS=[
+{"n": 236, "text": "깊이 생각하는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 234, "text": "깊이 생각하는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 207, "text": "새로운 가치를 만들려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "선악의 저편"},
+{"n": 327, "text": "자기 운명을 사랑하려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "즐거운 학문"},
+{"n": 142, "text": "자기 자신을 넘어서려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 127, "text": "두려움이 있다는 사실보다 두려움이 방향을 정하게 두는 것이 더 문제다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 284, "text": "창조하려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 299, "text": "창조하려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 302, "text": "삶을 긍정하려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "즐거운 학문"},
+{"n": 4, "text": "춤추는 별을 낳으려면 자기 안에 아직 혼돈을 지니고 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 352, "text": "홀로 설 수 있는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "선악의 저편"},
+{"n": 9, "text": "괴물과 싸우는 사람은 그 싸움 속에서 스스로 괴물이 되지 않도록 조심해야 한다.", "book": "선악의 저편"},
+{"n": 269, "text": "높은 곳을 향하는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 112, "text": "성장은 자신을 더 편하게 만드는 과정이 아니라 더 넓게 만드는 과정일 수 있다.", "book": "이 사람을 보라"},
+{"n": 313, "text": "삶을 긍정하려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "즐거운 학문"},
+{"n": 202, "text": "새로운 가치를 만들려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 48, "text": "남의 인정을 얻는 데 익숙해지면 자기 판단을 잃기 쉽다.", "book": "우상의 황혼"},
+{"n": 171, "text": "강해지려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 278, "text": "높은 곳을 향하는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 309, "text": "삶을 긍정하려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "즐거운 학문"},
+{"n": 308, "text": "삶을 긍정하려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "즐거운 학문"},
+{"n": 42, "text": "자기 약점을 인정하는 순간부터 그것을 다룰 힘이 생긴다.", "book": "도덕의 계보"},
+{"n": 286, "text": "창조하려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 129, "text": "삶의 불확실성을 없앨 수 없다면 그것을 견디는 힘을 키워야 한다.", "book": "도덕의 계보"},
+{"n": 213, "text": "새로운 가치를 만들려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "선악의 저편"},
+{"n": 124, "text": "자기 자신을 잃지 않는 것이 모든 관계의 출발점일 수 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 82, "text": "일시적인 실패보다 더 위험한 것은 스스로에 대한 기대를 버리는 일이다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 188, "text": "자유를 원하는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "선악의 저편"},
+{"n": 238, "text": "깊이 생각하는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "이 사람을 보라"},
+{"n": 135, "text": "삶에서 중요한 것은 얼마나 많은 것을 소유했는가보다 무엇을 위해 견뎠는가일 수 있다.", "book": "즐거운 학문"},
+{"n": 272, "text": "높은 곳을 향하는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 193, "text": "자유를 원하는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "선악의 저편"},
+{"n": 334, "text": "자기 운명을 사랑하려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 325, "text": "자기 운명을 사랑하려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "즐거운 학문"},
+{"n": 356, "text": "홀로 설 수 있는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 111, "text": "타인의 의견을 듣되 자신의 판단까지 빌려주지는 마라.", "book": "우상의 황혼"},
+{"n": 90, "text": "새로운 시작은 과거를 부정하는 일이 아니라 과거를 다른 방식으로 사용하는 일이다.", "book": "즐거운 학문"},
+{"n": 219, "text": "새로운 가치를 만들려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "선악의 저편"},
+{"n": 93, "text": "삶의 높이는 편안함의 크기가 아니라 감당할 수 있는 의미의 크기로 달라진다.", "book": "우상의 황혼"},
+{"n": 27, "text": "편안함은 휴식이 될 수 있지만 삶의 목표가 되어서는 안 된다.", "book": "즐거운 학문"},
+{"n": 346, "text": "홀로 설 수 있는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "이 사람을 보라"},
+{"n": 123, "text": "자신에게 솔직한 사람은 변명할 이유가 줄어든다.", "book": "안티크리스트"},
+{"n": 103, "text": "오늘의 선택은 미래의 성격을 조금씩 만든다.", "book": "선악의 저편"},
+{"n": 72, "text": "자기 자신에게 명령할 수 없는 사람은 쉽게 타인의 명령에 끌려간다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 314, "text": "삶을 긍정하려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 51, "text": "자기 안의 가장 약한 부분을 외면하지 않을 때 변화가 시작된다.", "book": "안티크리스트"},
+{"n": 287, "text": "창조하려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 80, "text": "자신을 바꾸지 않은 채 삶만 달라지기를 기다리지 마라.", "book": "선악의 저편"},
+{"n": 264, "text": "높은 곳을 향하는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 160, "text": "자기 자신을 넘어서려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 359, "text": "홀로 설 수 있는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "선악의 저편"},
+{"n": 339, "text": "자기 운명을 사랑하려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "즐거운 학문"},
+{"n": 107, "text": "자신을 극복하려면 먼저 자신이 무엇에 묶여 있는지 알아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 307, "text": "삶을 긍정하려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "즐거운 학문"},
+{"n": 330, "text": "자기 운명을 사랑하려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "즐거운 학문"},
+{"n": 2, "text": "음악이 없다면 삶은 하나의 오류일 것이다.", "book": "우상의 황혼"},
+{"n": 358, "text": "홀로 설 수 있는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 53, "text": "질문할 수 있는 사람만이 낡은 가치에서 벗어날 수 있다.", "book": "선악의 저편"},
+{"n": 289, "text": "창조하려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 95, "text": "창조는 기존의 질서를 거부하는 것에서 끝나지 않고 새로운 질서를 세우는 데까지 나아간다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 227, "text": "깊이 생각하는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "도덕의 계보"},
+{"n": 38, "text": "어려움은 제거해야 할 장애물일 때도 있지만 넘어야 할 계단일 때도 있다.", "book": "도덕의 계보"},
+{"n": 189, "text": "자유를 원하는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "선악의 저편"},
+{"n": 182, "text": "자유를 원하는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 274, "text": "높은 곳을 향하는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 218, "text": "새로운 가치를 만들려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "선악의 저편"},
+{"n": 209, "text": "새로운 가치를 만들려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "선악의 저편"},
+{"n": 15, "text": "도덕적 현상이 있는 것이 아니라, 현상에 대한 도덕적 해석이 있을 뿐이다.", "book": "선악의 저편"},
+{"n": 262, "text": "높은 곳을 향하는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 196, "text": "자유를 원하는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 50, "text": "오늘의 고통을 내일의 힘으로 바꾸는 사람이 강해진다.", "book": "도덕의 계보"},
+{"n": 130, "text": "성장은 자신을 증명하는 일보다 자신을 만들어가는 일에 가깝다.", "book": "이 사람을 보라"},
+{"n": 79, "text": "위대한 목표는 사람을 편안하게 하기보다 더 큰 사람으로 요구한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 136, "text": "자기 자신을 책임지는 사람은 운명을 탓하는 시간이 줄어든다.", "book": "즐거운 학문"},
+{"n": 364, "text": "자기 생각을 지키려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "이 사람을 보라"},
+{"n": 288, "text": "창조하려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 261, "text": "스스로의 길을 걷는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 17, "text": "무엇이 나쁜가? 약함에서 비롯되는 모든 것이다.", "book": "안티크리스트"},
+{"n": 252, "text": "스스로의 길을 걷는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 65, "text": "사람은 자신이 무엇을 반복하는지에 의해 만들어진다.", "book": "도덕의 계보"},
+{"n": 342, "text": "홀로 설 수 있는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 175, "text": "강해지려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 185, "text": "자유를 원하는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "선악의 저편"},
+{"n": 76, "text": "상처를 숨기는 것보다 그것을 의미 있는 경험으로 바꾸는 일이 중요하다.", "book": "도덕의 계보"},
+{"n": 154, "text": "자기 자신을 넘어서려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 87, "text": "자기 운명을 사랑하려면 결과뿐 아니라 과정도 자신의 것으로 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 67, "text": "자기 삶을 긍정하려면 과거의 실수까지 삶의 일부로 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 231, "text": "깊이 생각하는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 61, "text": "자유로운 정신은 익숙한 답보다 불편한 질문을 더 소중히 여긴다.", "book": "선악의 저편"},
+{"n": 108, "text": "실패를 부끄러워하기보다 실패에서 아무것도 배우지 못하는 것을 경계하라.", "book": "즐거운 학문"},
+{"n": 293, "text": "창조하려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 318, "text": "삶을 긍정하려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 69, "text": "두려움 없는 선택보다 두려움을 안고 내린 선택이 더 용기 있을 때가 많다.", "book": "선악의 저편"},
+{"n": 47, "text": "삶의 무게를 피하기보다 그것을 들 수 있는 힘을 키워라.", "book": "도덕의 계보"},
+{"n": 230, "text": "깊이 생각하는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 251, "text": "스스로의 길을 걷는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 138, "text": "의미 없는 고통을 미화할 필요는 없지만 피할 수 없는 고통에서 배울 것은 있다.", "book": "도덕의 계보"},
+{"n": 91, "text": "자유는 원하는 것을 모두 하는 것이 아니라 자신이 선택한 것에 책임지는 힘이다.", "book": "선악의 저편"},
+{"n": 296, "text": "창조하려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 259, "text": "스스로의 길을 걷는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 210, "text": "새로운 가치를 만들려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "선악의 저편"},
+{"n": 165, "text": "강해지려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "우상의 황혼"},
+{"n": 88, "text": "삶에서 가장 오래 남는 승리는 자기 자신을 이긴 순간일 수 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 170, "text": "강해지려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 78, "text": "성숙은 모든 갈등이 사라지는 상태가 아니라 갈등을 다루는 힘이 커지는 상태다.", "book": "도덕의 계보"},
+{"n": 145, "text": "자기 자신을 넘어서려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 98, "text": "위험을 모두 제거한 삶은 성장의 가능성도 함께 줄일 수 있다.", "book": "선악의 저편"},
+{"n": 19, "text": "희망은 때로 인간의 고통을 연장한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 333, "text": "자기 운명을 사랑하려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "즐거운 학문"},
+{"n": 260, "text": "스스로의 길을 걷는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 121, "text": "사람은 자신이 감당하려는 책임만큼 성장할 수 있다.", "book": "선악의 저편"},
+{"n": 31, "text": "자신의 생각을 가진다는 것은 그 결과까지 감당한다는 뜻이다.", "book": "이 사람을 보라"},
+{"n": 118, "text": "스스로 만든 가치만큼 스스로 지킬 가치도 필요하다.", "book": "선악의 저편"},
+{"n": 336, "text": "자기 운명을 사랑하려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "즐거운 학문"},
+{"n": 146, "text": "자기 자신을 넘어서려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 173, "text": "강해지려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "도덕의 계보"},
+{"n": 71, "text": "낡은 가치가 무너진 자리에서 새로운 책임이 시작된다.", "book": "선악의 저편"},
+{"n": 239, "text": "깊이 생각하는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "아침놀"},
+{"n": 20, "text": "광기는 개인에게서는 드물지만 집단과 정당, 민족과 시대에서는 오히려 흔하다.", "book": "선악의 저편"},
+{"n": 340, "text": "자기 운명을 사랑하려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "즐거운 학문"},
+{"n": 232, "text": "깊이 생각하는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "선악의 저편"},
+{"n": 283, "text": "창조하려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 360, "text": "홀로 설 수 있는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "도덕의 계보"},
+{"n": 349, "text": "홀로 설 수 있는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 131, "text": "다른 사람의 기대를 모두 만족시키는 삶은 결국 자신의 삶이 아닐 수 있다.", "book": "아침놀"},
+{"n": 250, "text": "스스로의 길을 걷는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 156, "text": "자기 자신을 넘어서려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 277, "text": "높은 곳을 향하는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 303, "text": "삶을 긍정하려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "즐거운 학문"},
+{"n": 183, "text": "자유를 원하는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "선악의 저편"},
+{"n": 116, "text": "가장 위험한 습관은 자신이 변할 수 없다고 믿는 습관이다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 347, "text": "홀로 설 수 있는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "아침놀"},
+{"n": 133, "text": "쉽게 얻은 확신보다 오래 고민한 질문이 더 가치 있을 때가 있다.", "book": "선악의 저편"},
+{"n": 320, "text": "삶을 긍정하려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "즐거운 학문"},
+{"n": 229, "text": "깊이 생각하는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "이 사람을 보라"},
+{"n": 158, "text": "자기 자신을 넘어서려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 268, "text": "높은 곳을 향하는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 248, "text": "스스로의 길을 걷는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 109, "text": "높은 기준은 부담이지만 동시에 사람을 끌어올리는 힘이기도 하다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 89, "text": "남을 설득하기 전에 자신이 무엇을 믿는지 분명히 하라.", "book": "선악의 저편"},
+{"n": 5, "text": "언제까지나 제자로만 남는다면 스승에게 잘 보답하는 것이 아니다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 120, "text": "낡은 나를 붙잡고 있으면서 새로운 삶을 원하기는 어렵다.", "book": "우상의 황혼"},
+{"n": 215, "text": "새로운 가치를 만들려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 294, "text": "창조하려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 104, "text": "자신에게 필요한 것은 더 많은 변명이 아니라 더 정확한 자기 인식일 때가 있다.", "book": "아침놀"},
+{"n": 14, "text": "자기 자신을 경멸하는 사람조차 경멸하는 자로서의 자기 자신은 여전히 존중한다.", "book": "선악의 저편"},
+{"n": 169, "text": "강해지려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 279, "text": "높은 곳을 향하는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 222, "text": "깊이 생각하는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 357, "text": "홀로 설 수 있는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "안티크리스트"},
+{"n": 114, "text": "자신이 선택하지 않은 고통도 자신의 힘으로 바꿀 수 있다.", "book": "선악의 저편"},
+{"n": 32, "text": "삶을 긍정한다는 것은 좋은 날만 선택한다는 뜻이 아니다.", "book": "즐거운 학문"},
+{"n": 290, "text": "창조하려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 253, "text": "스스로의 길을 걷는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 365, "text": "자기 생각을 지키려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "아침놀"},
+{"n": 206, "text": "새로운 가치를 만들려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "선악의 저편"},
+{"n": 16, "text": "무엇이 좋은가? 인간 안에서 힘의 감정과 힘에의 의지, 힘 그 자체를 높이는 모든 것이다.", "book": "안티크리스트"},
+{"n": 281, "text": "높은 곳을 향하는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 246, "text": "스스로의 길을 걷는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 119, "text": "자기 자신을 사랑한다는 것은 자신을 방치한다는 뜻이 아니다.", "book": "즐거운 학문"},
+{"n": 94, "text": "자기 자신을 위한 기준이 없다면 세상의 기준이 당신을 대신 결정한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 241, "text": "깊이 생각하는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 11, "text": "모든 깊은 정신은 하나의 가면을 필요로 한다.", "book": "선악의 저편"},
+{"n": 3, "text": "인간은 극복되어야 할 존재다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 273, "text": "높은 곳을 향하는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 84, "text": "자신의 가치가 무엇인지 모르면 타인의 평가가 삶의 기준이 된다.", "book": "선악의 저편"},
+{"n": 305, "text": "삶을 긍정하려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "즐거운 학문"},
+{"n": 59, "text": "오늘의 자신을 지키는 것보다 내일의 자신을 만드는 일이 더 중요할 때가 있다.", "book": "아침놀"},
+{"n": 174, "text": "강해지려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "우상의 황혼"},
+{"n": 24, "text": "무너지는 것은 더 밀어 넘어뜨려야 할 때도 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 233, "text": "깊이 생각하는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "선악의 저편"},
+{"n": 22, "text": "분노가 아니라 웃음으로 이겨내라.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 26, "text": "남의 기준으로 얻은 성공은 자신의 승리가 아닐 수 있다.", "book": "선악의 저편"},
+{"n": 348, "text": "홀로 설 수 있는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "도덕의 계보"},
+{"n": 39, "text": "끊임없이 비교하는 사람은 자기 삶의 방향을 잃기 쉽다.", "book": "우상의 황혼"},
+{"n": 315, "text": "삶을 긍정하려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "즐거운 학문"},
+{"n": 200, "text": "자유를 원하는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "선악의 저편"},
+{"n": 110, "text": "자기 자신을 바꾸는 사람에게 세상은 이전과 다르게 보인다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 41, "text": "새로운 삶은 새로운 결심보다 새로운 습관에서 시작된다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 304, "text": "삶을 긍정하려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "즐거운 학문"},
+{"n": 212, "text": "새로운 가치를 만들려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "선악의 저편"},
+{"n": 44, "text": "삶의 의미는 발견되기만 하는 것이 아니라 만들어지기도 한다.", "book": "선악의 저편"},
+{"n": 331, "text": "자기 운명을 사랑하려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "즐거운 학문"},
+{"n": 10, "text": "네가 오랫동안 심연을 들여다보면 심연도 너를 들여다본다.", "book": "선악의 저편"},
+{"n": 28, "text": "강함은 상처가 없는 상태가 아니라 상처를 다루는 능력에 가깝다.", "book": "도덕의 계보"},
+{"n": 147, "text": "자기 자신을 넘어서려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 341, "text": "자기 운명을 사랑하려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "즐거운 학문"},
+{"n": 134, "text": "자신의 한계를 시험하지 않으면 실제 한계를 알기 어렵다.", "book": "선악의 저편"},
+{"n": 338, "text": "자기 운명을 사랑하려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "즐거운 학문"},
+{"n": 102, "text": "쉬운 길이라는 이유만으로 옳은 길도 아니다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 311, "text": "삶을 긍정하려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "즐거운 학문"},
+{"n": 198, "text": "자유를 원하는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "선악의 저편"},
+{"n": 345, "text": "홀로 설 수 있는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "우상의 황혼"},
+{"n": 256, "text": "스스로의 길을 걷는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 25, "text": "자기 자신을 극복하는 일보다 더 어려운 정복은 없다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 257, "text": "스스로의 길을 걷는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 151, "text": "자기 자신을 넘어서려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 249, "text": "스스로의 길을 걷는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 36, "text": "높은 목표는 사람을 지치게도 하지만 동시에 더 큰 사람으로 만든다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 208, "text": "새로운 가치를 만들려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "선악의 저편"},
+{"n": 244, "text": "스스로의 길을 걷는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 214, "text": "새로운 가치를 만들려는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "선악의 저편"},
+{"n": 105, "text": "혼자 걸을 수 있어야 함께 걸을 사람도 제대로 선택할 수 있다.", "book": "선악의 저편"},
+{"n": 140, "text": "내일의 자신을 위해 오늘의 편안함을 일부 포기할 수 있어야 한다.", "book": "아침놀"},
+{"n": 255, "text": "스스로의 길을 걷는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 29, "text": "자유에는 언제나 책임이라는 무게가 따른다.", "book": "선악의 저편"},
+{"n": 291, "text": "창조하려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 265, "text": "높은 곳을 향하는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 34, "text": "사람은 자신이 견딘 것만큼이 아니라 그것을 어떻게 바꾸었는가로 성장한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 203, "text": "새로운 가치를 만들려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "선악의 저편"},
+{"n": 33, "text": "자기 운명을 사랑한다는 것은 지나간 시간을 다시 쓰려 하지 않는 태도다.", "book": "즐거운 학문"},
+{"n": 228, "text": "깊이 생각하는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "도덕의 계보"},
+{"n": 297, "text": "창조하려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 192, "text": "자유를 원하는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "선악의 저편"},
+{"n": 363, "text": "자기 생각을 지키려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "우상의 황혼"},
+{"n": 235, "text": "깊이 생각하는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 13, "text": "성숙이란 어린 시절 놀이할 때 지녔던 진지함을 다시 찾는 것이다.", "book": "선악의 저편"},
+{"n": 96, "text": "자신의 약함을 아는 것은 패배가 아니라 자기 이해의 시작이다.", "book": "도덕의 계보"},
+{"n": 62, "text": "스스로 세운 기준은 스스로 지킬 때 비로소 가치가 생긴다.", "book": "선악의 저편"},
+{"n": 361, "text": "홀로 설 수 있는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 204, "text": "새로운 가치를 만들려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "선악의 저편"},
+{"n": 40, "text": "스스로 질문하지 않는 확신은 쉽게 타인의 확신이 된다.", "book": "이 사람을 보라"},
+{"n": 240, "text": "깊이 생각하는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "도덕의 계보"},
+{"n": 86, "text": "어떤 고통은 피할수록 커지고 통과할수록 작아진다.", "book": "도덕의 계보"},
+{"n": 23, "text": "춤추는 별을 낳으려면 자기 안에 혼돈을 품을 줄 알아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 271, "text": "높은 곳을 향하는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 258, "text": "스스로의 길을 걷는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 66, "text": "힘은 지배보다 자기 통제에서 먼저 드러난다.", "book": "도덕의 계보"},
+{"n": 43, "text": "성장은 자신을 칭찬하는 데서보다 자신을 넘어서는 데서 시작된다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 337, "text": "자기 운명을 사랑하려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "즐거운 학문"},
+{"n": 63, "text": "운명을 사랑한다는 것은 삶의 일부를 삭제하고 싶어 하지 않는 태도다.", "book": "즐거운 학문"},
+{"n": 75, "text": "무엇을 포기할지 아는 것도 힘의 한 형태다.", "book": "도덕의 계보"},
+{"n": 355, "text": "홀로 설 수 있는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 351, "text": "홀로 설 수 있는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 161, "text": "자기 자신을 넘어서려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 1, "text": "나를 죽이지 못하는 것은 나를 더 강하게 만든다.", "book": "우상의 황혼"},
+{"n": 301, "text": "창조하려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 266, "text": "높은 곳을 향하는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 181, "text": "강해지려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 316, "text": "삶을 긍정하려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "즐거운 학문"},
+{"n": 199, "text": "자유를 원하는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "선악의 저편"},
+{"n": 60, "text": "자기 한계를 인정하되 그것을 영원한 경계로 여기지는 마라.", "book": "즐거운 학문"},
+{"n": 326, "text": "자기 운명을 사랑하려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "즐거운 학문"},
+{"n": 162, "text": "강해지려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 126, "text": "자신을 높이기 위해 남을 낮출 필요는 없다.", "book": "즐거운 학문"},
+{"n": 144, "text": "자기 자신을 넘어서려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 46, "text": "혼돈은 때로 새로운 질서가 태어나는 자리다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 223, "text": "깊이 생각하는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 295, "text": "창조하려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 12, "text": "사랑으로 행해지는 것은 언제나 선과 악의 저편에서 일어난다.", "book": "선악의 저편"},
+{"n": 99, "text": "사람은 자신이 가장 자주 생각하는 방향으로 조금씩 변한다.", "book": "즐거운 학문"},
+{"n": 237, "text": "깊이 생각하는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "우상의 황혼"},
+{"n": 139, "text": "자기 안의 혼돈을 질서로 바꾸는 일이 창조의 시작이다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 350, "text": "홀로 설 수 있는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 310, "text": "삶을 긍정하려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "즐거운 학문"},
+{"n": 92, "text": "강한 정신은 불편한 진실을 피하지 않는다.", "book": "도덕의 계보"},
+{"n": 97, "text": "자기 삶을 선택한다는 것은 그 선택의 대가까지 선택하는 것이다.", "book": "선악의 저편"},
+{"n": 143, "text": "자기 자신을 넘어서려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 168, "text": "강해지려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "도덕의 계보"},
+{"n": 292, "text": "창조하려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 57, "text": "자신을 넘어서는 일은 한 번의 결심이 아니라 반복되는 훈련이다.", "book": "우상의 황혼"},
+{"n": 128, "text": "자기 자신을 이해하는 데는 혼자 있는 시간이 필요하다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 285, "text": "창조하려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 122, "text": "불편한 진실은 때로 편안한 거짓보다 더 친절하다.", "book": "아침놀"},
+{"n": 148, "text": "자기 자신을 넘어서려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 247, "text": "스스로의 길을 걷는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 177, "text": "강해지려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "안티크리스트"},
+{"n": 117, "text": "오늘을 반복하면서 다른 내일을 기대하지 마라.", "book": "즐거운 학문"},
+{"n": 245, "text": "스스로의 길을 걷는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 187, "text": "자유를 원하는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "선악의 저편"},
+{"n": 254, "text": "스스로의 길을 걷는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 52, "text": "실패는 끝이 아니라 자신의 기준을 다시 세우는 순간이 될 수 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 83, "text": "확신은 필요하지만 확신을 의심할 능력도 필요하다.", "book": "도덕의 계보"},
+{"n": 344, "text": "홀로 설 수 있는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "도덕의 계보"},
+{"n": 343, "text": "홀로 설 수 있는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 300, "text": "창조하려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 190, "text": "자유를 원하는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "선악의 저편"},
+{"n": 137, "text": "강한 사람은 필요할 때 방향을 바꿀 줄도 안다.", "book": "도덕의 계보"},
+{"n": 157, "text": "자기 자신을 넘어서려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 101, "text": "힘든 길이라는 이유만으로 틀린 길은 아니다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 224, "text": "깊이 생각하는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "선악의 저편"},
+{"n": 100, "text": "자기 자신과의 약속을 반복해서 어기면 자기 신뢰도 약해진다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 132, "text": "자기 판단을 믿으려면 먼저 자기 판단을 훈련해야 한다.", "book": "안티크리스트"},
+{"n": 328, "text": "자기 운명을 사랑하려는 사람은 고통을 피하는 데만 힘쓰지 말고 그것이 무엇을 가르치는지 보아야 한다.", "book": "즐거운 학문"},
+{"n": 58, "text": "강한 사람은 모든 것을 견디는 사람이 아니라 무엇을 견딜지 선택하는 사람이다.", "book": "선악의 저편"},
+{"n": 166, "text": "강해지려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "이 사람을 보라"},
+{"n": 150, "text": "자기 자신을 넘어서려는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 211, "text": "새로운 가치를 만들려는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 85, "text": "깊은 사람은 혼자 있는 시간과 친해질 필요가 있다.", "book": "이 사람을 보라"},
+{"n": 306, "text": "삶을 긍정하려는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "즐거운 학문"},
+{"n": 332, "text": "자기 운명을 사랑하려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "즐거운 학문"},
+{"n": 195, "text": "자유를 원하는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 7, "text": "사랑에는 언제나 어느 정도의 광기가 있다. 그러나 광기 속에도 어느 정도의 이성이 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 226, "text": "깊이 생각하는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 220, "text": "새로운 가치를 만들려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "선악의 저편"},
+{"n": 77, "text": "자기 자신을 존중한다는 것은 자신의 기준을 낮추지 않는 일과도 관련된다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 115, "text": "자기 삶의 의미를 남에게 맡기지 마라.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 298, "text": "창조하려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 45, "text": "자기 자신을 속이지 않는 것이 가장 어려운 정직일 수 있다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 54, "text": "자신의 길을 걷는 사람은 때때로 혼자 걸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 280, "text": "높은 곳을 향하는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 64, "text": "성장은 자신에게 더 어려운 질문을 던질 수 있게 되는 과정이기도 하다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 321, "text": "삶을 긍정하려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "즐거운 학문"},
+{"n": 354, "text": "홀로 설 수 있는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "우상의 황혼"},
+{"n": 164, "text": "강해지려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "도덕의 계보"},
+{"n": 353, "text": "홀로 설 수 있는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "도덕의 계보"},
+{"n": 74, "text": "삶은 설명만으로 바뀌지 않는다. 선택과 행동이 삶을 바꾼다.", "book": "선악의 저편"},
+{"n": 322, "text": "자기 운명을 사랑하려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "즐거운 학문"},
+{"n": 6, "text": "나는 피로 쓴 글만을 사랑한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 55, "text": "진정한 변화는 자신이 무엇을 원하는지 정직하게 묻는 데서 시작된다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 221, "text": "새로운 가치를 만들려는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 329, "text": "자기 운명을 사랑하려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "즐거운 학문"},
+{"n": 319, "text": "삶을 긍정하려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "즐거운 학문"},
+{"n": 263, "text": "높은 곳을 향하는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 335, "text": "자기 운명을 사랑하려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "즐거운 학문"},
+{"n": 282, "text": "창조하려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 35, "text": "진실은 위로보다 불편할 수 있지만 더 오래 남는다.", "book": "선악의 저편"},
+{"n": 172, "text": "강해지려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "선악의 저편"},
+{"n": 163, "text": "강해지려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 243, "text": "스스로의 길을 걷는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 201, "text": "자유를 원하는 사람은 어제의 자신보다 조금 더 높은 기준을 오늘의 자신에게 요구해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 153, "text": "자기 자신을 넘어서려는 사람은 남에게 보이기 위한 삶보다 스스로 납득할 수 있는 삶을 만들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 179, "text": "강해지려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "선악의 저편"},
+{"n": 152, "text": "자기 자신을 넘어서려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 73, "text": "모든 답을 가진 사람보다 계속 질문할 수 있는 사람이 더 멀리 간다.", "book": "인간적인, 너무나 인간적인"},
+{"n": 242, "text": "스스로의 길을 걷는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 362, "text": "자기 생각을 지키려는 사람은 익숙한 안전보다 불편한 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 141, "text": "자신의 삶에 질문을 던지는 사람만이 자신의 답을 만들 수 있다.", "book": "안티크리스트"},
+{"n": 216, "text": "새로운 가치를 만들려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 276, "text": "높은 곳을 향하는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 167, "text": "강해지려는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "아침놀"},
+{"n": 176, "text": "강해지려는 사람은 자기 안의 모순을 숨기지 말고 그것을 더 높은 형태로 바꾸어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 8, "text": "이것이 나의 길이다. 그대들의 길은 어디에 있는가? 하나뿐인 길이란 존재하지 않는다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 18, "text": "행복이란 힘이 자라고 저항이 극복되고 있다는 느낌이다.", "book": "안티크리스트"},
+{"n": 267, "text": "높은 곳을 향하는 사람은 혼자 있는 시간을 견디며 자기 목소리를 들어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 149, "text": "자기 자신을 넘어서려는 사람은 현재의 자신을 완성품으로 여기지 말아야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 186, "text": "자유를 원하는 사람은 낡은 기준을 의심하고 새로운 기준을 스스로 세워야 한다.", "book": "선악의 저편"},
+{"n": 125, "text": "삶을 바꾸는 것은 큰 사건보다 반복되는 작은 선택일 때가 많다.", "book": "선악의 저편"},
+{"n": 81, "text": "자기 삶의 방향을 정하지 않으면 다른 사람이 정한 방향으로 흐르기 쉽다.", "book": "즐거운 학문"},
+{"n": 159, "text": "자기 자신을 넘어서려는 사람은 모두가 옳다고 말하는 순간에도 스스로 질문할 수 있어야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 49, "text": "스스로 선택한 길이라면 어려움도 그 길의 일부로 받아들여라.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 70, "text": "자신의 고통을 이해하는 사람은 타인의 고통도 가볍게 판단하지 않는다.", "book": "도덕의 계보"},
+{"n": 225, "text": "깊이 생각하는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "즐거운 학문"},
+{"n": 37, "text": "자기 자신에게 지나치게 관대한 사람은 쉽게 정체된다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 68, "text": "남보다 앞서는 것보다 어제의 자신을 넘어서는 일이 더 중요할 수 있다.", "book": "아침놀"},
+{"n": 106, "text": "삶을 사랑한다는 것은 삶의 모순까지 견디는 일이다.", "book": "즐거운 학문"},
+{"n": 56, "text": "타인의 시선에서 멀어질수록 자신의 목소리가 또렷해질 수 있다.", "book": "선악의 저편"},
+{"n": 184, "text": "자유를 원하는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "선악의 저편"},
+{"n": 275, "text": "높은 곳을 향하는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 191, "text": "자유를 원하는 사람은 쉽게 얻는 만족보다 오래 남는 성장을 선택해야 한다.", "book": "선악의 저편"},
+{"n": 155, "text": "자기 자신을 넘어서려는 사람은 남의 길을 따라가는 대신 자기 길의 대가를 감당해야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 21, "text": "사람들과 함께 살아가는 것이 어려운 것은 침묵하기가 그만큼 어렵기 때문이다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 30, "text": "홀로 설 수 없는 사람은 군중 속에서도 자신을 잃기 쉽다.", "book": "우상의 황혼"},
+{"n": 312, "text": "삶을 긍정하려는 사람은 자신이 믿는 가치에 대해 책임질 준비가 되어 있어야 한다.", "book": "즐거운 학문"},
+{"n": 205, "text": "새로운 가치를 만들려는 사람은 두려움을 없애려 하기보다 두려움과 함께 앞으로 가야 한다.", "book": "선악의 저편"},
+{"n": 270, "text": "높은 곳을 향하는 사람은 반복되는 습관 속에서 자신을 약하게 만드는 것을 찾아내야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 178, "text": "강해지려는 사람은 칭찬보다 자신을 더 정확히 보게 만드는 비판을 받아들여야 한다.", "book": "차라투스트라는 이렇게 말했다"},
+{"n": 324, "text": "자기 운명을 사랑하려는 사람은 실패를 핑계가 아니라 재료로 사용해야 한다.", "book": "즐거운 학문"},
+{"n": 197, "text": "자유를 원하는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "선악의 저편"},
+{"n": 180, "text": "강해지려는 사람은 결과가 늦더라도 자기 힘을 키우는 방향으로 움직여야 한다.", "book": "도덕의 계보"},
+{"n": 323, "text": "자기 운명을 사랑하려는 사람은 타인의 박수보다 자신의 판단을 더 엄격하게 다뤄야 한다.", "book": "즐거운 학문"},
+{"n": 217, "text": "새로운 가치를 만들려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "선악의 저편"},
+{"n": 194, "text": "자유를 원하는 사람은 과거를 원망하기보다 그것까지 자신의 삶으로 받아들여야 한다.", "book": "선악의 저편"},
+{"n": 317, "text": "삶을 긍정하려는 사람은 편안함이 자신을 약하게 만들고 있지는 않은지 자주 살펴야 한다.", "book": "즐거운 학문"},
+{"n": 113, "text": "힘은 감정을 없애는 데 있지 않고 감정에 끌려가지 않는 데 있다.", "book": "도덕의 계보"}
+];
+let quoteOffset=0;
+function quoteBaseIndex(){const now=new Date(),start=new Date(now.getFullYear(),0,0);return Math.max(0,Math.floor((now-start)/86400000)-1)%DAILY_THOUGHTS.length}
+function renderDailyThought(){
+ const el=document.querySelector('#dailyQuote'),bookEl=document.querySelector('#dailyQuoteBook');if(!el)return;
+ const i=(quoteBaseIndex()+quoteOffset+DAILY_THOUGHTS.length)%DAILY_THOUGHTS.length,q=DAILY_THOUGHTS[i];
+ el.textContent=`${String(q.n).padStart(3,'0')}. ${q.text}`;
+ if(bookEl)bookEl.textContent=`— 『${q.book}』`;
+}
+function renderDay(){const picker=document.querySelector('#dayPicker');const chosen=new Date(picker.value+'T00:00:00');let rows=allTasks().filter(x=>{const d=dateForTask(x.t,chosen);return d&&localISO(d)===picker.value&&!x.t.pinned&&!x.t.archivedDone});const key=picker.value;const ids=rows.map(x=>x.t.id);let order=(data.ui.dayOrders[key]||[]).filter(id=>ids.includes(id));ids.forEach(id=>{if(!order.includes(id))order.push(id)});data.ui.dayOrders[key]=order;const pos=new Map(order.map((id,i)=>[id,i]));rows.sort((a,b)=>(pos.get(a.t.id)??9999)-(pos.get(b.t.id)??9999));const root=document.querySelector('#dayList');root.innerHTML='';if(!rows.length){root.innerHTML=`<div class='empty'>${fmt(chosen)}에 등록된 업무가 없습니다.</div>`;return}rows.forEach(x=>{const el=document.createElement('div');el.className='day-row'+(x.t.done?' done':'');el.draggable=true;el.dataset.taskId=x.t.id;el.innerHTML=`<span class='check'></span><div><div class='day-title'>${escapeHtml(x.t.title)}</div>${x.t.note?`<div class='mini-note ${picker.value===localISO(new Date())?'today-note':''}'>${escapeHtml(x.t.note)}</div>`:''}</div><span class='tag' style='${tagStyle(x.b)}'>#${escapeHtml(boardLabel(x.b))}</span>`;el.querySelector('.check').onclick=()=>toggleDone(x.t);root.appendChild(el)});bindDayTaskDnD()}
+function bindDayTaskDnD(){const root=document.querySelector('#dayList'),key=document.querySelector('#dayPicker').value;let dragId=null;const clear=()=>root.querySelectorAll('.day-row').forEach(r=>r.classList.remove('day-drop-before','day-drop-after','day-dragging'));root.querySelectorAll('.day-row').forEach(row=>{row.addEventListener('dragstart',e=>{dragId=row.dataset.taskId;row.classList.add('day-dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',dragId)});row.addEventListener('dragend',()=>{clear();dragId=null});row.addEventListener('dragover',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();clear();const r=row.getBoundingClientRect();row.classList.add(e.clientY>r.top+r.height/2?'day-drop-after':'day-drop-before')});row.addEventListener('drop',e=>{if(!dragId||dragId===row.dataset.taskId)return;e.preventDefault();const target=row.dataset.taskId,after=e.clientY>row.getBoundingClientRect().top+row.getBoundingClientRect().height/2;let order=(data.ui.dayOrders[key]||[]).filter(id=>id!==dragId);let i=order.indexOf(target);if(i<0)i=order.length-1;order.splice(i+(after?1:0),0,dragId);data.ui.dayOrders[key]=order;save();renderDay()})})}
+function renderWeek(){const anchor=new Date(document.querySelector('#weekPicker').value+'T00:00:00');const start=startOfWeek(anchor),end=addDays(start,6),nextStart=addDays(start,7),nextEnd=addDays(start,13);document.querySelector('#weekRange').textContent=`${start.getFullYear()}년 ${fmt(start)} ~ ${fmt(end)}`;const completed=allTasks().filter(x=>x.t.done&&x.t.completedAt&&new Date(x.t.completedAt)>=start&&new Date(x.t.completedAt)<addDays(end,1));const carry=allTasks().filter(x=>{if(x.t.done||x.t.pinned||x.t.archivedDone)return false;const d=dateForTask(x.t,start);return d&&d<=end});const next=allTasks().filter(x=>{if(x.t.done||x.t.pinned||x.t.archivedDone)return false;const d=dateForTask(x.t,nextStart);return d&&d>=nextStart&&d<=nextEnd});document.querySelector('#weekSummary').innerHTML=`<span>완료 ${completed.length}</span><span>미완료·이월 ${carry.length}</span><span>차주 예정 ${next.length}</span>`;const group=rows=>data.boards.map(b=>({b,rows:rows.filter(x=>x.b.id===b.id)})).filter(g=>g.rows.length);let text=`[주간업무보고] ${fmt(start)}~${fmt(end)}\n\n[완료업무]\n`;for(const g of group(completed)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows){const p=parts(x.t.title);text+=`- ${p?p.sub+' | '+p.content:x.t.title}\n`;if(x.t.note)text+=`  ${x.t.note.replace(/\n/g,' / ')}\n`}}text+='\n[미완료·이월]\n';if(!carry.length)text+='- 없음\n';for(const g of group(carry)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows)text+=`- ${x.t.title}\n`}text+='\n[차주 예정]\n';if(!next.length)text+='- 없음\n';for(const g of group(next)){text+=`\n▷${boardLabel(g.b)}\n`;for(const x of g.rows)text+=`- ${x.t.title}\n`}document.querySelector('#reportText').value=text.trim()}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+let dayAutoRight=true;
+function openDay(){const p=document.querySelector('#dayPicker');p.value=localISO(new Date());renderDay();const d=document.querySelector('#dayDialog');const size=Math.min(5,Math.max(1,+data.ui.daySize||2));d.className='day-panel day-size-'+size;document.querySelector('#daySizeSelect').value=String(size);dayAutoRight=true;d.style.left='auto';d.style.right='12px';d.style.top='78px';d.showModal()}
+function openWeek(){const p=document.querySelector('#weekPicker');p.value=localISO(new Date());renderWeek();document.querySelector('#weekDialog').showModal()}
+function renderCategoryEditor(){const root=document.querySelector('#categoryEditor');root.innerHTML='';data.boards.forEach((b,i)=>{const row=document.createElement('div');row.className='category-edit-row';const [bg,fg]=(b.color||COLORS[i%COLORS.length]).split('|');row.innerHTML=`<span class='category-swatch' style='background:${bg};border-color:${fg}'></span><input value='${escapeHtml(boardLabel(b))}' maxlength='30'><span class='category-color-note'>색상 유지</span>`;const input=row.querySelector('input');input.onchange=()=>{const v=input.value.trim();if(v){b.displayName=v;save();render();renderDayIfOpen();renderStars()}};root.appendChild(row)})}
+function renderDayIfOpen(){if(document.querySelector('#dayDialog')?.open)renderDay()}
+document.querySelector('#categorySettings').onclick=()=>{renderCategoryEditor();document.querySelector('#categoryDialog').showModal()};
+document.querySelector('#addCategory').onclick=()=>{const i=data.boards.length;data.boards.push({id:'cat_'+uid(),name:'대분류',displayName:`새 대분류 ${i+1}`,desc:'',size:2,sort:'latest',color:COLORS[i%COLORS.length],tasks:[]});save();render();renderCategoryEditor()};
+document.querySelector('#editAppTitle').onclick=()=>{const v=prompt('업무보드 이름을 입력하세요.',data.appTitle);if(v&&v.trim()){data.appTitle=v.trim();save();render()}};
+const rPicker=document.querySelector('#rDayPicker');if(rPicker){rPicker.value=localISO(new Date());rPicker.onchange=renderResponsiveDay;document.querySelector('#rPrevDay').onclick=()=>{rPicker.value=localISO(addDays(new Date(rPicker.value+'T00:00:00'),-1));renderResponsiveDay()};document.querySelector('#rNextDay').onclick=()=>{rPicker.value=localISO(addDays(new Date(rPicker.value+'T00:00:00'),1));renderResponsiveDay()};}
+document.querySelector('#helpView').onclick=()=>document.querySelector('#helpDialog').showModal();document.querySelector('#dayView').onclick=openDay;document.querySelector('#weekView').onclick=openWeek;document.querySelector('#starView').onclick=()=>{renderStars();document.querySelector('#starDialog').showModal()};document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>document.querySelector('#'+b.dataset.close).close());
+document.querySelector('#daySizeSelect').onchange=e=>{const n=Math.min(5,Math.max(1,+e.target.value||2));data.ui.daySize=n;save();const d=document.querySelector('#dayDialog');d.className='day-panel day-size-'+n;if(dayAutoRight){d.style.left='auto';d.style.right='12px'}else clampDayPanel()};
+function clampDayPanel(){const d=document.querySelector('#dayDialog');if(!d.open)return;if(dayAutoRight){d.style.left='auto';d.style.right='12px';return}const r=d.getBoundingClientRect();let left=r.left,top=r.top;if(r.right>innerWidth-4)left=Math.max(4,innerWidth-r.width-4);if(r.bottom>innerHeight-4)top=Math.max(4,innerHeight-r.height-4);if(left<4)left=4;if(top<4)top=4;d.style.left=left+'px';d.style.right='auto';d.style.top=top+'px'}
+(function bindDayPanelDrag(){const d=document.querySelector('#dayDialog'),h=d.querySelector('.day-drag-handle');let drag=null;h.addEventListener('pointerdown',e=>{if(e.target.closest('button,select,input'))return;const r=d.getBoundingClientRect();dayAutoRight=false;drag={dx:e.clientX-r.left,dy:e.clientY-r.top};h.setPointerCapture(e.pointerId);e.preventDefault()});h.addEventListener('pointermove',e=>{if(!drag)return;const w=d.offsetWidth,hgt=d.offsetHeight;const left=Math.max(4,Math.min(innerWidth-w-4,e.clientX-drag.dx));const top=Math.max(4,Math.min(innerHeight-hgt-4,e.clientY-drag.dy));d.style.left=left+'px';d.style.right='auto';d.style.top=top+'px'});const stop=()=>drag=null;h.addEventListener('pointerup',stop);h.addEventListener('pointercancel',stop);window.addEventListener('resize',clampDayPanel)})();
+document.querySelector('#dayPicker').onchange=renderDay;document.querySelector('#todayBtn').onclick=()=>{document.querySelector('#dayPicker').value=localISO(new Date());renderDay()};document.querySelector('#prevDay').onclick=()=>shiftDay(-1);document.querySelector('#nextDay').onclick=()=>shiftDay(1);function shiftDay(n){const p=document.querySelector('#dayPicker');p.value=localISO(addDays(new Date(p.value+'T00:00:00'),n));renderDay()}
+document.querySelector('#weekPicker').onchange=renderWeek;document.querySelector('#thisWeekBtn').onclick=()=>{document.querySelector('#weekPicker').value=localISO(new Date());renderWeek()};document.querySelector('#prevWeek').onclick=()=>shiftWeek(-7);document.querySelector('#nextWeek').onclick=()=>shiftWeek(7);function shiftWeek(n){const p=document.querySelector('#weekPicker');p.value=localISO(addDays(new Date(p.value+'T00:00:00'),n));renderWeek()}
+document.querySelector('#copyReport').onclick=async()=>{const t=document.querySelector('#reportText');try{await navigator.clipboard.writeText(t.value);document.querySelector('#copyReport').textContent='복사됨';setTimeout(()=>document.querySelector('#copyReport').textContent='보고서 복사',1000)}catch{t.select();document.execCommand('copy')}};
+document.querySelector('#exportBtn').onclick=async()=>{const json=JSON.stringify(data,null,2),blob=new Blob([json],{type:'application/json'}),name='mason-workboard-v2.33.1 FIREBASE AUTH MENUFIX-backup.json';if('showSaveFilePicker' in window){try{const handle=await window.showSaveFilePicker({suggestedName:name,types:[{description:'JSON 백업 파일',accept:{'application/json':['.json']}}]});const writable=await handle.createWritable();await writable.write(blob);await writable.close();return}catch(err){if(err&&err.name==='AbortError')return}}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)};document.querySelector('#importFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);migrate();save();render()}catch{alert('올바른 백업 파일이 아닙니다.')}};r.readAsText(f)};
+document.querySelector('#quotePrev').onclick=()=>{quoteOffset--;renderDailyThought()};document.querySelector('#quoteNext').onclick=()=>{quoteOffset++;renderDailyThought()};
+
+// v2.33.1 FIREBASE AUTH MENUFIX 설명 모드: 화면 기능을 잠그고 공식 UI 명칭을 표시한다.
+let explainMode=false;
+function explainTargets(){
+ const specs=[
+  ['#categorySettings','대분류 설정'],['#helpView','사용방법'],['#dayView','날짜별 할 일'],['#weekView','주간보고'],['#starView','별표 업무'],['#exportBtn','백업'],['label.import','복원'],['#explainView','설명'],
+  ['.board','대분류 보드'],['.board-head h2','보드 제목'],['.task','업무 카드'],['.task .title','업무 제목'],['.task .notes','업무 메모'],
+  ['#quotePrev','이전 문장'],['#quoteNext','다음 문장']
+ ];
+ const out=[]; const seen=new Set();
+ specs.forEach(([sel,name])=>{const el=document.querySelector(sel);if(el&&!seen.has(el)){seen.add(el);out.push([el,name])}});
+ return out;
+}
+function positionExplainLabels(){
+ document.querySelectorAll('.explain-label,.explain-lines').forEach(x=>x.remove());
+ document.querySelectorAll('.explain-target').forEach(x=>x.classList.remove('explain-target'));
+ if(!explainMode)return;
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('explain-lines');document.body.appendChild(svg);
+ const margin=8,safeTop=8,safeBottom=12;
+ const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+ const updateLine=(lab,line,el)=>{
+   const b=lab.getBoundingClientRect(),r=el.getBoundingClientRect(),lx=b.left+b.width/2,ly=b.top+b.height/2;
+   let tx=r.left+r.width/2,ty=r.top+r.height/2;
+   if(lx<r.left){tx=r.left;ty=clamp(ly,r.top,r.bottom)}
+   else if(lx>r.right){tx=r.right;ty=clamp(ly,r.top,r.bottom)}
+   else if(ly<r.top){tx=clamp(lx,r.left,r.right);ty=r.top}
+   else {tx=clamp(lx,r.left,r.right);ty=r.bottom}
+   line.setAttribute('x1',lx);line.setAttribute('y1',ly);line.setAttribute('x2',tx);line.setAttribute('y2',ty);
+ };
+ explainTargets().forEach(([el,name],idx)=>{
+   const r=el.getBoundingClientRect();
+   if(r.width<1||r.height<1||r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth)return;
+   el.classList.add('explain-target');
+   const lab=document.createElement('div');lab.className='explain-label';lab.textContent=name;lab.style.visibility='hidden';document.body.appendChild(lab);
+   const lw=lab.offsetWidth,lh=lab.offsetHeight;
+   let left=r.left,top=r.top-lh-7;
+
+   // Fixed positions based on the annotated reference layout.
+   if(name==='대분류 보드'){left=r.left+2;top=r.top-lh-8}
+   else if(name==='보드 제목'){left=r.left;top=r.top-lh-8}
+   else if(name==='업무 카드'){left=r.right-lw-8;top=r.top-lh-7}
+   else if(name==='업무 제목'){left=r.left+Math.min(190,Math.max(80,r.width*.58));top=r.top-lh-7}
+   else if(name==='업무 메모'){left=r.right-lw-12;top=r.top+Math.max(4,(r.height-lh)/2)}
+   else if(name==='오늘의 문장'){left=r.left+(r.width-lw)/2;top=r.top-lh-7}
+   else if(name==='이전 문장'){left=r.left;top=r.top-lh-7}
+   else if(name==='다음 문장'){left=r.right-lw;top=r.top-lh-7}
+   else {
+     // Header/menu labels stay directly below their controls for a stable, repeatable layout.
+     left=r.left+(r.width-lw)/2;top=r.bottom+7;
+   }
+
+   left=clamp(left,margin,innerWidth-lw-margin);
+   top=clamp(top,safeTop,innerHeight-lh-safeBottom);
+   lab.style.left=left+'px';lab.style.top=top+'px';lab.style.visibility='visible';
+   const line=document.createElementNS('http://www.w3.org/2000/svg','line');svg.appendChild(line);updateLine(lab,line,el);
+ });
+}function openExplainMode(){
+ if(explainMode)return;explainMode=true;closeTaskMenu();
+ const ov=document.createElement('div');ov.className='explain-overlay';ov.id='explainOverlay';
+ ov.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation()},true);ov.addEventListener('click',e=>{e.preventDefault();e.stopPropagation()},true);
+ document.body.appendChild(ov);
+ const cap=document.createElement('div');cap.className='explain-caption';cap.textContent='화면 설명 모드 · 빨간색 명칭은 공식 UI 이름입니다';document.body.appendChild(cap);
+ const close=document.createElement('button');close.className='explain-close';close.id='explainClose';close.type='button';close.setAttribute('aria-label','설명 모드 닫기');close.textContent='×';close.onclick=closeExplainMode;document.body.appendChild(close);
+ positionExplainLabels();
+}
+function closeExplainMode(){
+ if(!explainMode)return;explainMode=false;
+ document.querySelectorAll('.explain-label,.explain-lines,.explain-caption,#explainOverlay,#explainClose').forEach(x=>x.remove());
+ document.querySelectorAll('.explain-target').forEach(x=>x.classList.remove('explain-target'));
+}
+document.querySelector('#explainView').onclick=openExplainMode;
+document.addEventListener('keydown',e=>{if(explainMode){if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeExplainMode()}else{e.preventDefault();e.stopImmediatePropagation()} }},true);
+document.addEventListener('keydown',e=>{
+ if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&e.key.toLowerCase()==='z'){
+   const a=document.activeElement;
+   if(a && (a.matches?.('input,textarea,[contenteditable="true"]') || a.isContentEditable))return;
+   e.preventDefault();
+   undoLastAction();
+ }
+});
+window.addEventListener('resize',()=>{if(explainMode)positionExplainLabels()});
+window.addEventListener('scroll',()=>{if(explainMode)positionExplainLabels()},true);
+
+render();renderDailyThought();
+</script><script>
+(function(){
+ function updateClock(){const e=document.getElementById('desktopClock');if(!e)return;const d=new Date(),y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),da=String(d.getDate()).padStart(2,'0'),ap=d.getHours()<12?'오전':'오후',h=d.getHours()%12||12,mi=String(d.getMinutes()).padStart(2,'0'),se=String(d.getSeconds()).padStart(2,'0');e.textContent=`${y}-${m}-${da}   ${ap}${h}:${mi}:${se}`}
+ updateClock();setInterval(updateClock,1000);
+ function markPast(){
+  if(matchMedia('(max-width:1024px)').matches||matchMedia('(pointer:coarse)').matches)return;
+  const n=new Date(),today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  document.querySelectorAll('.task-card,.task,.card,[data-task-id]').forEach(c=>{
+   if(c.closest('.completed,.completed-list,.completed-drawer,[data-completed="true"]'))return;
+   const t=c.querySelector('.task-title,.title')||c.querySelector('textarea,input,[contenteditable]')||c;
+   const x=(t.value||t.textContent||'').trim(),m=x.match(/(?:^|\s)(\d{1,2})\.(\d{1,2})(?:\s*\||\s|$)/);if(!m)return;
+   let d=new Date(n.getFullYear(),+m[1]-1,+m[2]);if(d-today>183*864e5)d=new Date(n.getFullYear()-1,+m[1]-1,+m[2]);if(today-d>183*864e5)d=new Date(n.getFullYear()+1,+m[1]-1,+m[2]);
+   t.classList.toggle('past-task-title',d<today);
+  });
+ }
+ let tm;new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(markPast,60)}).observe(document.body,{childList:true,subtree:true,characterData:true});
+ setTimeout(markPast,120);setInterval(markPast,60000);
+})();
+</script><div id="pomoTest" class="pomo-test" aria-label="뽀모도로 테스트">
+ <div class="pomo-top"><span>집중 타이머 · TEST</span><button id="pomoFold" title="접기">−</button></div>
+ <div class="pomo-body">
+  <div id="pomoMode" class="pomo-mode">집중 25분</div>
+  <div class="pomo-adjust"><button id="pomoMinus" type="button">−5분</button><span id="pomoFocusMin">25분</span><button id="pomoPlus" type="button">+5분</button></div>
+  <div id="pomoTime" class="pomo-time">25:00</div>
+  <div class="pomo-actions"><button id="pomoStart">시작</button><button id="pomoReset">초기화</button><button id="pomoSwitch">휴식</button></div>
+ </div>
+</div>
+<script>
+(function(){
+ let mode='focus',focusMin=25,left=focusMin*60,running=false,timer=null;
+ const $=id=>document.getElementById(id),dur=()=>mode==='focus'?focusMin*60:5*60;
+ function draw(){
+   $('pomoTime').textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
+   $('pomoMode').textContent=mode==='focus'?`집중 ${focusMin}분`:'휴식 5분';
+   $('pomoFocusMin').textContent=focusMin+'분';
+   $('pomoStart').textContent=running?'일시정지':'시작';
+   $('pomoSwitch').textContent=mode==='focus'?'휴식':'집중';
+   $('pomoMinus').disabled=focusMin<=5;
+   $('pomoPlus').disabled=focusMin>=120;
+ }
+ function stop(){running=false;if(timer){clearInterval(timer);timer=null}draw()}
+ function start(){if(running){stop();return}running=true;draw();timer=setInterval(()=>{if(left>0){left--;draw()}else{stop();try{navigator.vibrate&&navigator.vibrate([150,80,150])}catch(e){};alert(mode==='focus'?'집중 시간이 끝났습니다.':'휴식 시간이 끝났습니다.')}},1000)}
+ function adjust(delta){
+   focusMin=Math.max(5,Math.min(120,focusMin+delta));
+   if(mode==='focus'&&!running)left=focusMin*60;
+   else if(mode==='focus'&&running)left=Math.max(0,left+delta*60);
+   draw();
+ }
+ $('pomoStart').onclick=start;
+ $('pomoReset').onclick=()=>{stop();left=dur();draw()};
+ $('pomoSwitch').onclick=()=>{stop();mode=mode==='focus'?'break':'focus';left=dur();draw()};
+ $('pomoMinus').onclick=()=>adjust(-5);
+ $('pomoPlus').onclick=()=>adjust(5);
+ $('pomoFold').onclick=()=>{const w=$('pomoTest'),c=w.classList.toggle('collapsed');$('pomoFold').textContent=c?'+':'−'};
+ draw();
+})();
+</script><script>
+(function(){
+ const mount=()=>{
+   if(document.getElementById('firebaseAuthBtn'))return;
+   const host=document.querySelector('.header-actions')||document.querySelector('header')||document.body;
+   const wrap=document.createElement('div');wrap.className='firebase-auth-wrap';
+   wrap.innerHTML='<button id="firebaseAuthBtn" class="firebase-auth-btn" type="button">Google 로그인</button><button id="firebaseUidBtn" class="firebase-uid-btn" type="button">UID 복사</button>';
+   host.appendChild(wrap);
+   const st=document.createElement('div');st.id='firebaseAuthStatus';st.className='firebase-auth-status';document.body.appendChild(st);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+})();
+</script><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDZoG792I92pG3oRrLidH3_eXAuZLUWWn4",
+  authDomain: "mason-workboard.firebaseapp.com",
+  projectId: "mason-workboard",
+  storageBucket: "mason-workboard.firebasestorage.app",
+  messagingSenderId: "889645444414",
+  appId: "1:889645444414:web:ebb3f3da4439de7573906f",
+  measurementId: "G-L9W2CHDCZP"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:"select_account"});
+let currentUser=null;
+const $=id=>document.getElementById(id);
+
+function ensureUI(){return new Promise(resolve=>{const hit=()=>{if($('firebaseAuthBtn'))resolve();else setTimeout(hit,30)};hit()})}
+function showStatus(html,autoHide=false){const el=$('firebaseAuthStatus');if(!el)return;el.innerHTML=html;el.classList.add('show');if(autoHide)setTimeout(()=>el.classList.remove('show'),4500)}
+
+await ensureUI();
+const loginBtn=$('firebaseAuthBtn'),uidBtn=$('firebaseUidBtn');
+
+loginBtn.addEventListener('click',async()=>{
+  if(currentUser){
+    if(confirm(`${currentUser.email||'현재 계정'}에서 로그아웃할까요?`)) await signOut(auth);
+    return;
+  }
+  if(location.protocol==='file:'){
+    showStatus('<b>Google 로그인 준비 완료</b><br>현재 파일을 <code>file://</code>로 열었습니다.<br>Firebase Google 로그인은 GitHub Pages 같은 HTTPS 주소에서 테스트하는 것을 권장합니다.<div class="muted">앱 코드는 연결되어 있으며, 배포 후 같은 버튼으로 로그인하면 됩니다.</div>');
+    return;
+  }
+  try{ await signInWithPopup(auth,provider); }
+  catch(err){
+    console.error(err);
+    showStatus(`<b>Google 로그인 실패</b><br>${String(err.code||err.message||err)}<div class="muted">Firebase Authentication의 승인된 도메인도 확인하세요.</div>`);
+  }
+});
+
+uidBtn.addEventListener('click',async()=>{
+  if(!currentUser)return;
+  try{
+    await navigator.clipboard.writeText(currentUser.uid);
+    showStatus(`<b>UID를 복사했습니다.</b><br><code>${currentUser.uid}</code>`,true);
+  }catch{
+    showStatus(`<b>사용자 UID</b><br><code>${currentUser.uid}</code>`);
+  }
+});
+
+onAuthStateChanged(auth,user=>{
+  currentUser=user;
+  if(user){
+    loginBtn.textContent='로그인됨 · '+(user.displayName||user.email||'Google');
+    loginBtn.classList.add('signed-in');
+    uidBtn.style.display='inline-flex';
+    showStatus(`<b>Firebase 로그인 완료</b><br>${user.email||''}<div class="muted">UID: <code>${user.uid}</code><br>다음 단계에서 이 UID만 Firestore 접근을 허용합니다.</div>`);
+  }else{
+    loginBtn.textContent='Google 로그인';
+    loginBtn.classList.remove('signed-in');
+    uidBtn.style.display='none';
+    const st=$('firebaseAuthStatus');if(st)st.classList.remove('show');
+  }
+});
+
+window.masonFirebase={app,auth};
+</script></body></html>
